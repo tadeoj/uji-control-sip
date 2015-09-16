@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" activate="startup" deactivate="shutdown" name="es.uji.control.sip.model">
+   <implementation class="es.uji.control.sip.model.internal.Component"/>
+   <service>
+      <provide interface="es.uji.control.sip.model.IModelContainer"/>
+   </service>
+</scr:component>
