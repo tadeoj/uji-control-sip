@@ -1,0 +1,111 @@
+package es.uji.control.sip.db;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+@Table(name = "PER_VW_PERSONAS_SUBVINCULOS", schema = "GRI_PER")
+public class PerVwPersonasSubvinculo implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@EmbeddedId
+	private PerVwPersonasSubvinculoPK id;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "FECHA")
+	private Date fecha;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="FECHA_FIN")
+	private Date fechaFin;
+
+	@Column(name = "IDENTIFICACION")
+	private String identificacion;
+
+	@Column(name = "NOMBRE")
+	private String nombre;
+
+	@Column(name="SVI_NOMBRE")
+	private String sviNombre;
+
+	@Column(name="VIN_ID")
+	private long vinId;
+
+	@Column(name="VIN_NOMBRE")
+	private String vinNombre;
+
+	public PerVwPersonasSubvinculo() {
+	}
+
+	public PerVwPersonasSubvinculoPK getId() {
+		return this.id;
+	}
+
+	public void setId(PerVwPersonasSubvinculoPK id) {
+		this.id = id;
+	}
+	
+	public Date getFecha() {
+		return this.fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
+	public Date getFechaFin() {
+		return this.fechaFin;
+	}
+
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
+	public String getIdentificacion() {
+		return this.identificacion;
+	}
+
+	public void setIdentificacion(String identificacion) {
+		this.identificacion = identificacion;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getSviNombre() {
+		return this.sviNombre;
+	}
+
+	public void setSviNombre(String sviNombre) {
+		this.sviNombre = sviNombre;
+	}
+
+	public long getVinId() {
+		return this.vinId;
+	}
+
+	public void setVinId(long vinId) {
+		this.vinId = vinId;
+	}
+
+	public String getVinNombre() {
+		return this.vinNombre;
+	}
+
+	public void setVinNombre(String vinNombre) {
+		this.vinNombre = vinNombre;
+	}
+
+}

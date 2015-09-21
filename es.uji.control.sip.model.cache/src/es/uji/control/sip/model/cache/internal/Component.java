@@ -43,7 +43,7 @@ public class Component implements ICache {
 	// Gestión de la cache del modelo
 	////////////////////////////////////////////////////////////////////
 	@Override
-	public Model readModelFromCache(long zoneId) {
+	public Model readModelFromCache() {
 		
 		// Se crea el recurso del cual se va a obtener el modelo.
 		Resource resource = new XMIResourceFactoryImpl().createResource(fileURI);
@@ -74,15 +74,8 @@ public class Component implements ICache {
 			
 			if (object instanceof Model) {
 				
-				if (((Model) object).getZoneId() != zoneId) {
-					logger.info("El modelo de datos no corresponde a la zona indicada");
-					return null;
-				}
-				
 				// Se recupera la fecha del modelo
 				model.setDate(((Model) object).getDate());
-				model.setZoneId(((Model) object).getZoneId());
-				model.setZoneName(((Model) object).getZoneName());
 			} else {
 				if (object instanceof Persons) {
 					TreeIterator<EObject> personsContents = object.eAllContents();
