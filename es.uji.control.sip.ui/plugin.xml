@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="true"
+            class="es.uji.control.sip.ui.views.ViewVoid"
+            id="es.uji.control.sip.ui.views.ViewVoid"
+            name="name"
+            restorable="true">
+      </view>
+   </extension>
 
 
 </plugin>
