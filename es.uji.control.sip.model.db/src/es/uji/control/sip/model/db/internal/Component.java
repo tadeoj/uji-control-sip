@@ -135,7 +135,9 @@ public class Component implements IModelDAO {
 			person.setName(scuVPersona.getNombre());
 			person.setFirstName1(scuVPersona.getApellido1());
 			person.setFirstName2(scuVPersona.getApellido2());
-			person.setLink(scuVPersona.getVinculo());
+			
+			// TODO: Falata reimplementar el modelo
+			//person.setLink(scuVPersona.getVinculo());
 			
 			// Se recorre la lista de tarjetas
 			for (ScuVTarjeta scuVTarjeta : listScuVTarjeta) {
