@@ -9,10 +9,6 @@
             name="es.uji.control.sip.ui"
             application="org.eclipse.e4.ui.workbench.swt.E4Application">
          <property
-               name="applicationCSS"
-               value="platform:/plugin/es.uji.control.sip.ui/css/default.css">
-         </property>
-         <property
                name="appName"
                value="es.uji.control.sip.ui">
          </property>
