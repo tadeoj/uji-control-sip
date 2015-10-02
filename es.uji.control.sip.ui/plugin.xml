@@ -6,8 +6,8 @@
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            name="es.uji.control.sip.ui"
-            application="org.eclipse.e4.ui.workbench.swt.E4Application">
+            application="org.eclipse.e4.ui.workbench.swt.E4Application"
+            name="es.uji.control.sip.ui">
          <property
                name="appName"
                value="es.uji.control.sip.ui">
