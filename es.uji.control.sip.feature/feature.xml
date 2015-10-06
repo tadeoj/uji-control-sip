@@ -20,6 +20,10 @@
          id="es.uji.control.sip.e4.feature"
          version="0.0.0"/>
 
+   <includes
+         id="es.uji.control.domain.feature"
+         version="0.0.0"/>
+
    <plugin
          id="es.uji.control.sip.ui"
          download-size="0"

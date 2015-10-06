@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="es.uji.control.sip.preferences.storefactory">
-   <implementation class="es.uji.control.sip.preferences.internal.PreferenceStoreFactoryServiceImpl"/>
-   <service>
-      <provide interface="es.uji.control.sip.preferences.IPreferenceStoreFactoryService"/>
-   </service>
-</scr:component>

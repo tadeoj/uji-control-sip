@@ -12,23 +12,20 @@
     </children>
     <trimBars xmi:id="_6wlLlcgZEeSyMNYR5xypkQ">
       <children xsi:type="menu:ToolBar" xmi:id="_6wlLlsgZEeSyMNYR5xypkQ" elementId="toolbar:org.eclipse.ui.main.toolbar">
-        <children xsi:type="menu:HandledToolItem" xmi:id="_6wlLl8gZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.handledtoolitem.write.preferences.id" label="Write Preferences" iconURI="" command="_W2YbkGhXEeWMTMKddW-xAA"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_awgtYGjcEeW1tsPfCoAkIA" elementId="es.uji.control.sip.ui.handledtoolitem.read.preferences.id" label="Read Preferences" command="_CwIdkGjcEeW1tsPfCoAkIA"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_2IYIgGj_EeW1tsPfCoAkIA" elementId="es.uji.control.sip.ui.handledtoolitem.preferences.id" label="Preferences Dialog" command="_vu1zkGj_EeW1tsPfCoAkIA"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_Jl-ucGwmEeWNZ5lhpLHGNA" elementId="es.uji.control.sip.ui.handledtoolitem.secure.preferences.id" label="Secure Preferences Dialog" command="_DGjz8GwmEeWNZ5lhpLHGNA"/>
       </children>
     </trimBars>
   </children>
-  <handlers xmi:id="_J5ixsGhXEeWMTMKddW-xAA" elementId="es.uji.control.sip.ui.handler.write.preferences.id" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.handlers.WritePreferenceHandler" command="_W2YbkGhXEeWMTMKddW-xAA"/>
-  <handlers xmi:id="_G6dwAGjcEeW1tsPfCoAkIA" elementId="es.uji.control.sip.ui.handler.read.preferences.id" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.handlers.ReadPreferenceHandler" command="_CwIdkGjcEeW1tsPfCoAkIA"/>
   <handlers xmi:id="_qF5OEGj_EeW1tsPfCoAkIA" elementId="es.uji.control.sip.ui.handler.preferences.id" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.handlers.PreferencesHandler" command="_vu1zkGj_EeW1tsPfCoAkIA"/>
+  <handlers xmi:id="_-0KxsGwlEeWNZ5lhpLHGNA" elementId="es.uji.control.sip.ui.handler.secure.preferences.id" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.handlers.SecurePreferencesHandler" command="_DGjz8GwmEeWNZ5lhpLHGNA"/>
   <bindingTables xmi:id="_6wlLfsgZEeSyMNYR5xypkQ" bindingContext="_6wlLecgZEeSyMNYR5xypkQ"/>
   <rootContext xmi:id="_6wlLecgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
     <children xmi:id="_6wlLesgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
     <children xmi:id="_6wlLe8gZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
   </rootContext>
-  <commands xmi:id="_W2YbkGhXEeWMTMKddW-xAA" elementId="es.uji.control.sip.ui.command.write.preferences.id" commandName="WritePreferences"/>
-  <commands xmi:id="_CwIdkGjcEeW1tsPfCoAkIA" elementId="es.uji.control.sip.ui.command.read.preferences.id" commandName="ReadPreferences"/>
   <commands xmi:id="_vu1zkGj_EeW1tsPfCoAkIA" elementId="es.uji.control.sip.ui.command.preferences.id" commandName="Preferences Dialog"/>
+  <commands xmi:id="_DGjz8GwmEeWNZ5lhpLHGNA" elementId="es.uji.control.sip.ui.command.secure.preferences.id" commandName="Secure Preferences Dialog"/>
   <addons xmi:id="_6wlLcsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_6wlLc8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_6wlLdMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
