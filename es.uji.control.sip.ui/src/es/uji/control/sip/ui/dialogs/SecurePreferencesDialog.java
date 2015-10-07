@@ -27,11 +27,9 @@ import org.osgi.service.prefs.BackingStoreException;
 @SuppressWarnings("restriction")
 public class SecurePreferencesDialog extends TitleAreaDialog {
 
-	@Inject
-	@Preference(nodePath = "secure.jdbc", value = "username")
 	private String username;
 
-	@Inject
+	@Inject 
 	@Preference(nodePath = "secure.jdbc", value = "password")
 	private String password;
 
@@ -46,8 +44,7 @@ public class SecurePreferencesDialog extends TitleAreaDialog {
 	private Text hostField;
 
 	@Inject
-	public SecurePreferencesDialog(@Named(IServiceConstants.ACTIVE_SHELL) Shell parentShell,
-			@Preference(nodePath = "secure.jdbc") ISecurePreferences prefs) {
+	public SecurePreferencesDialog(@Named(IServiceConstants.ACTIVE_SHELL) Shell parentShell, @Preference(nodePath = "secure.jdbc") ISecurePreferences prefs) {
 		super(parentShell);
 		this.prefs = prefs;
 	}
