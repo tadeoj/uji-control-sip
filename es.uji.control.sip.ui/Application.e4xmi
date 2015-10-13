@@ -3,9 +3,9 @@
   <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.window.id" label="SIP UJI" width="800" height="800">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_6wlLkMgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.window.perspectiveStack.id">
       <children xsi:type="advanced:Perspective" xmi:id="_6wlLkcgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.window.perspective.id">
-        <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.partSash.id" selectedElement="_6wlLk8gZEeSyMNYR5xypkQ">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.partSash.id" selectedElement="_6wlLk8gZEeSyMNYR5xypkQ" horizontal="true">
           <children xsi:type="basic:PartStack" xmi:id="_6wlLk8gZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.partStack.id">
-            <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" accessibilityPhrase="es.uji.control.sip.ui.part.googleMaps.id" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.parts.GoogleMapsPart" label="Google Maps"/>
+            <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" accessibilityPhrase="" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.parts.SearchUsersPart" label="Buscador de usuarios"/>
           </children>
         </children>
       </children>
