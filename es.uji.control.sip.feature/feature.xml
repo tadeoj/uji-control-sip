@@ -17,10 +17,6 @@
    </license>
 
    <includes
-         id="es.uji.control.sip.e4.feature"
-         version="1.0.0.qualifier"/>
-
-   <includes
          id="es.uji.control.domain.feature"
          version="1.0.0.qualifier"/>
 
