@@ -1,12 +1,9 @@
 /*******************************************************************************
- * Copyright (c) 2014 TwelveTone LLC and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     Steven Spungin <steven@spungin.tv> - initial API and implementation
+ * Copyright © Universitat Jaume I de Castelló 2015.
+ * Aquest programari es distribueix sota les condicions de llicència EUPL 
+ * o de qualsevol altra que la substituisca en el futur.
+ * La llicència completa es pot descarregar de 
+ * https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11
  *******************************************************************************/
 package es.uji.control.sip.ui;
 
