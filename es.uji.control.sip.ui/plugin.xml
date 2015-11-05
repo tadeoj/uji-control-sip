@@ -20,6 +20,10 @@
                name="appName"
                value="es.uji.control.sip.ui">
          </property>
+         <property
+               name="lifeCycleURI"
+               value="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.E4LifeCycle">
+         </property>
       </product>
    </extension>
 

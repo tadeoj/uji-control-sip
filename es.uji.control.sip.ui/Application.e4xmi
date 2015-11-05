@@ -15,11 +15,14 @@
         <children xsi:type="menu:HandledToolItem" xmi:id="_yZHwwGzqEeWRBJTWZWHwtA" elementId="es.uji.control.sip.ui.handledtoolitem.preferences" label="Preferences" command="_t8UOQGzqEeWRBJTWZWHwtA"/>
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_eFqE4HJLEeWv4dHJNTTlPw" elementId="es.uji.control.sip.ui.toolbarseparator.0"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_dWNk8HJLEeWv4dHJNTTlPw" elementId="es.uji.control.sip.ui.handledtoolitem.addPart" label="Añadir vista" command="_W_t88HJLEeWv4dHJNTTlPw"/>
+        <children xsi:type="menu:ToolBarSeparator" xmi:id="_Z2VAQIO7EeWPQbut-vlbVg" elementId="es.uji.control.sip.ui.toolbarseparator.1"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_aiMAsIO7EeWPQbut-vlbVg" elementId="es.uji.control.sip.ui.handledtoolitem.actualizarmodelo" label="Actualizar Modelo" command="_Hp9VQIOhEeWlHvik4xu1Sw"/>
       </children>
     </trimBars>
   </children>
   <handlers xmi:id="_kuX4AGzqEeWRBJTWZWHwtA" elementId="es.uji.control.sip.ui.handler.preferences" contributionURI="bundleclass://com.opcoach.e4.preferences/com.opcoach.e4.preferences.handlers.E4PreferencesHandler" command="_t8UOQGzqEeWRBJTWZWHwtA"/>
   <handlers xmi:id="_Lxl3oHJLEeWv4dHJNTTlPw" elementId="es.uji.control.sip.ui.handler.addPart" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.handlers.AddPartHandler" command="_W_t88HJLEeWv4dHJNTTlPw"/>
+  <handlers xmi:id="_TuAXIIO7EeWPQbut-vlbVg" elementId="es.uji.control.sip.ui.handler.updateModel" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.handlers.UpdateModelHandler" command="_Hp9VQIOhEeWlHvik4xu1Sw"/>
   <bindingTables xmi:id="_6wlLfsgZEeSyMNYR5xypkQ" bindingContext="_6wlLecgZEeSyMNYR5xypkQ"/>
   <rootContext xmi:id="_6wlLecgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
     <children xmi:id="_6wlLesgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
@@ -27,6 +30,7 @@
   </rootContext>
   <commands xmi:id="_t8UOQGzqEeWRBJTWZWHwtA" elementId="org.eclipse.ui.window.preferences" commandName="Preferences"/>
   <commands xmi:id="_W_t88HJLEeWv4dHJNTTlPw" elementId="es.uji.control.sip.ui.command.addPart" commandName="Añadir vista"/>
+  <commands xmi:id="_Hp9VQIOhEeWlHvik4xu1Sw" elementId="es.uji.control.sip.ui.command.updateModel" commandName="Actualizar modelo"/>
   <addons xmi:id="_6wlLcsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_6wlLc8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_6wlLdMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>

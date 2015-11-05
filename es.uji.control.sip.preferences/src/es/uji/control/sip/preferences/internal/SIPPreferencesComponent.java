@@ -31,7 +31,7 @@ public class SIPPreferencesComponent {
 		return this.bundlecontext;
 	}
 
-	@Reference(policy = ReferencePolicy.STATIC, cardinality = ReferenceCardinality.MANDATORY, name = "sipControlConnectionFactorySelector")
+	@Reference(policy = ReferencePolicy.DYNAMIC, cardinality = ReferenceCardinality.OPTIONAL, name = "sipControlConnectionFactorySelector")
 	public void bindConnectionFactorySelector(IControlConnectionFactorySelector factorySelector) {
 		this.factorySelector = factorySelector;
 	}

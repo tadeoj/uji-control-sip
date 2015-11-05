@@ -10,20 +10,38 @@ package es.uji.control.sip.ui;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
+import es.uji.control.sip.ui.services.ControlConnectionFactoryServiceTracker;
+
 public class Activator implements BundleActivator {
 
 	private static BundleContext context;
 
-	static BundleContext getContext() {
-		return context;
-	}
+	// Servicios:
+	public static ControlConnectionFactoryServiceTracker controlConnectionFactoryServiceTracker; 
 
+	public Activator() {
+	}
+	
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
+		initTrackers(context);
 	}
 
 	public void stop(BundleContext bundleContext) throws Exception {
 		Activator.context = null;
+		closeTrackers();
 	}
 
+	private void initTrackers(BundleContext context) {
+		controlConnectionFactoryServiceTracker = new ControlConnectionFactoryServiceTracker(context);
+	}
+	
+	private void closeTrackers() {
+		controlConnectionFactoryServiceTracker.close();
+	}
+
+	public static BundleContext getContext() {
+		return context;
+	}
+	
 }
