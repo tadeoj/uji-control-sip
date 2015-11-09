@@ -1,4 +1,4 @@
-package es.uji.control.sip.preferences;
+package es.uji.control.sip.ui.preferences;
 
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;

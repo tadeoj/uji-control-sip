@@ -1,4 +1,4 @@
-package es.uji.control.sip.preferences.internal;
+package es.uji.control.sip.ui.preferences.internal;
 
 import java.util.Iterator;
 import java.util.Set;
