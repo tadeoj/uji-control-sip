@@ -4,14 +4,14 @@
    <extension
          point="com.opcoach.e4.preferences.e4PreferenceStoreProvider">
       <preferenceStoreProvider
-            class="es.uji.control.sip.ui.preferences.SIPPreferenceStoreProvider"
+            class="es.uji.control.sip.preferences.SIPPreferenceStoreProvider"
             pluginId="es.uji.control.sip.preferences">
       </preferenceStoreProvider>
    </extension>
    <extension
          point="com.opcoach.e4.preferences.e4PreferencePages">
       <page
-            class="es.uji.control.sip.ui.preferences.internal.SIPSelectorPreferencesPage"
+            class="es.uji.control.sip.preferences.internal.SIPSelectorPreferencesPage"
             id="es.uji.control.sip.preferences.page"
             name="Conexiones">
       </page>

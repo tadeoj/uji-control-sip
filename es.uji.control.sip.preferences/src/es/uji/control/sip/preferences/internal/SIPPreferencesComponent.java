@@ -1,4 +1,4 @@
-package es.uji.control.sip.ui.preferences.internal;
+package es.uji.control.sip.preferences.internal;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.service.component.ComponentContext;
