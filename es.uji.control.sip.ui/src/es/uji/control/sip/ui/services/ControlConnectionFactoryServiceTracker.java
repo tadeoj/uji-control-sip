@@ -5,7 +5,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 
-import es.uji.control.domain.service.connectionfactory.IControlConnectionFactory;
+import es.uji.control.domain.provider.service.connectionfactory.IControlConnectionFactory;
 
 public class ControlConnectionFactoryServiceTracker extends ServiceTracker<IControlConnectionFactory, Object> {
 		

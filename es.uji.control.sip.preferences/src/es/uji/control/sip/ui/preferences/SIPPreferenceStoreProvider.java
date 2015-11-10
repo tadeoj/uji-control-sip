@@ -1,4 +1,4 @@
-package es.uji.control.sip.preferences;
+package es.uji.control.sip.ui.preferences;
 
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -12,7 +12,7 @@ public class SIPPreferenceStoreProvider implements IPreferenceStoreProvider {
 	
 	@Override
 	public IPreferenceStore getPreferenceStore() {
-		store  = new ScopedPreferenceStore(InstanceScope.INSTANCE, "es.uji.control.sip.preferences");
+		store  = new ScopedPreferenceStore(InstanceScope.INSTANCE, "es.uji.control.sip.ui.preferences");
 		return store;
 	}
 	

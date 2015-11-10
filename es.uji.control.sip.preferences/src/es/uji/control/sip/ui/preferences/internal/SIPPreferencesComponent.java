@@ -1,4 +1,4 @@
-package es.uji.control.sip.preferences.internal;
+package es.uji.control.sip.ui.preferences.internal;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.service.component.ComponentContext;
@@ -9,7 +9,7 @@ import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
 
-import es.uji.control.domain.service.factoryselector.IControlConnectionFactorySelector;
+import es.uji.control.domain.provider.service.factoryselector.IControlConnectionFactorySelector;
 
 @Component(name = "sip.ui.preferences", immediate = true)
 public class SIPPreferencesComponent {

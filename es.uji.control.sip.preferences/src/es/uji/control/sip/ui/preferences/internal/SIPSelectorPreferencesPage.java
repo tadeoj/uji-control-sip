@@ -1,4 +1,4 @@
-package es.uji.control.sip.preferences.internal;
+package es.uji.control.sip.ui.preferences.internal;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -6,8 +6,8 @@ import java.util.Set;
 import org.eclipse.jface.preference.ComboFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 
-import es.uji.control.domain.service.factoryselector.ConnectionFactoryKey;
-import es.uji.control.domain.service.factoryselector.IControlConnectionFactorySelector;
+import es.uji.control.domain.provider.service.factoryselector.ConnectionFactoryKey;
+import es.uji.control.domain.provider.service.factoryselector.IControlConnectionFactorySelector;
 
 
 public class SIPSelectorPreferencesPage extends FieldEditorPreferencePage {
@@ -24,10 +24,8 @@ public class SIPSelectorPreferencesPage extends FieldEditorPreferencePage {
 		
 		String[][] connections = new String[][]{};
 		selector = SIPPreferencesComponent.getSelector();
-		ConnectionFactoryKey currentFactoryKey = null;
 		
 		if (selector != null) {
-			currentFactoryKey = selector.getCurrentFactoryKey();
 			Set<ConnectionFactoryKey> factoryKeys = selector.getFactoryKeys();
 			
 			ConnectionFactoryKey[] array = factoryKeys.toArray(new ConnectionFactoryKey[factoryKeys.size()]);
@@ -41,11 +39,7 @@ public class SIPSelectorPreferencesPage extends FieldEditorPreferencePage {
 		
 		combo = new ComboFieldEditor("prefCombo", "Elija una conexión:", connections, getFieldEditorParent());
 		addField(combo);
-		
-		if (currentFactoryKey != null) {
-			combo.setPreferenceName(currentFactoryKey.toString());
-		}
-		
+
 	}
 	
 	public String getSelectedValue() { 
