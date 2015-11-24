@@ -1,5 +1,7 @@
 package es.uji.control.sip.ui.handlers;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -11,9 +13,12 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
+import es.uji.control.domain.people.IPerson;
 import es.uji.control.domain.provider.service.connectionfactory.ControlConnectionException;
+import es.uji.control.domain.provider.service.connectionfactory.ControlNotImplementedException;
 import es.uji.control.domain.provider.service.connectionfactory.IControlConnection;
 import es.uji.control.domain.provider.service.connectionfactory.IControlConnectionFactory;
+import es.uji.control.domain.provider.subsystem.people.IPersonStream;
 import es.uji.control.sip.ui.Activator;
 
 public class UpdateModelHandler {
@@ -38,7 +43,30 @@ public class UpdateModelHandler {
 		
 		try {
 			connection = connectionFactory.createConnection();
+			
+			connection.getPersonService().getAllPersons(new IPersonStream() {
+				
+				@Override
+				public void onNext(List<IPerson> persons) {
+					System.out.println("-------------------------------------------------------");
+					System.out.println(persons.size());
+					System.out.println("-------------------------------------------------------");
+				}
+				
+				@Override
+				public void onError(Throwable t) {
+					System.out.println("----------------------ERROR---------------------------------");
+				}
+				
+				@Override
+				public void onCompleted() {
+					System.out.println("--------------------------MODELO CARGADO---------------------");
+				}
+			});
+			
 		} catch (ControlConnectionException e) {
+			MessageDialog.openError(shell, "Error", e.getMessage());
+		} catch (ControlNotImplementedException e) {
 			MessageDialog.openError(shell, "Error", e.getMessage());
 		}
 		
