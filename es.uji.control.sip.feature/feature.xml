@@ -28,7 +28,11 @@
          version="1.0.0.qualifier"/>
 
    <includes
-         id="es.uji.control.domain.ujioracle.feature"
+         id="es.uji.control.domain.ujioracle.ui.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="es.uji.control.model.sip.feature"
          version="0.0.0"/>
 
    <plugin

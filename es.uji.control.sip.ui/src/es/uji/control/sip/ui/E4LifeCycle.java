@@ -24,10 +24,10 @@ public class E4LifeCycle {
 	
 	@PostContextCreate
 	void postContextCreate(IEclipseContext workbenchContext) {
-		//IEventBroker eventBroker = (IEventBroker) workbenchContext.get(IEventBroker.class.getName());
 		Activator.controlConnectionFactoryServiceTracker.activateEventBroker(eventBroker);
 		Activator.controlConnectionFactoryServiceTracker.open();
-		
+		Activator.modelSIPServiceTracker.activateEventBroker(eventBroker);
+		Activator.modelSIPServiceTracker.open();
 	}
 
 	@PreSave

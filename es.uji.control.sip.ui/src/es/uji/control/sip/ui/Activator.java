@@ -11,13 +11,14 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
 import es.uji.control.sip.ui.services.ControlConnectionFactoryServiceTracker;
+import es.uji.control.sip.ui.services.ModelSIPServiceTracker;
 
 public class Activator implements BundleActivator {
 
 	private static BundleContext context;
 
-	// Servicios:
 	public static ControlConnectionFactoryServiceTracker controlConnectionFactoryServiceTracker; 
+	public static ModelSIPServiceTracker modelSIPServiceTracker;
 
 	public Activator() {
 	}
@@ -34,10 +35,12 @@ public class Activator implements BundleActivator {
 
 	private void initTrackers(BundleContext context) {
 		controlConnectionFactoryServiceTracker = new ControlConnectionFactoryServiceTracker(context);
+		modelSIPServiceTracker = new ModelSIPServiceTracker(context);
 	}
 	
 	private void closeTrackers() {
 		controlConnectionFactoryServiceTracker.close();
+		modelSIPServiceTracker.close();
 	}
 
 	public static BundleContext getContext() {

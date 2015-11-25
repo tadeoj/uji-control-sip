@@ -23,19 +23,21 @@ import es.uji.control.domain.provider.service.connectionfactory.ControlConnectio
 import es.uji.control.domain.provider.service.connectionfactory.IControlConnection;
 import es.uji.control.domain.provider.service.connectionfactory.IControlConnectionFactory;
 import es.uji.control.domain.provider.subsystem.people.IPersonStream;
+import es.uji.control.model.sip.IModelSIP;
 import es.uji.control.sip.ui.Activator;
 
 public class UpdateModelHandler {
 
-	private boolean canActivate = false;
 	private IControlConnectionFactory connectionFactory;
+	private IModelSIP modelSIP;
 	private Shell shell;
 
 	@Inject
 	public UpdateModelHandler(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell) {
-		if (Activator.controlConnectionFactoryServiceTracker.getConnectionFactory() != null) {
+		if (Activator.controlConnectionFactoryServiceTracker.getConnectionFactory() != null && Activator.modelSIPServiceTracker.getModelSIP() != null) {
 			connectionFactory = Activator.controlConnectionFactoryServiceTracker.getConnectionFactory();
-			canActivate = true;
+			modelSIP = Activator.modelSIPServiceTracker.getModelSIP();
+			canActivate();
 			this.shell = shell;
 		}
 	}
@@ -99,23 +101,47 @@ public class UpdateModelHandler {
 	
 	@CanExecute
 	public boolean canExecute() {
-		return canActivate;
+		return canActivate();
 	}
 
+	private boolean canActivate() {
+		if (modelSIP != null && connectionFactory != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	@Inject
 	@Optional
 	private void subscribeConnectionFactoryAdded(
 			@UIEventTopic("ADDED_CONNECTION_FACTORY_SERVICE") IControlConnectionFactory connectionFactory) {
 		this.connectionFactory = connectionFactory;
-		this.canActivate = true;
+		canActivate();
 	}
 
 	@Inject
 	@Optional
 	private void subscribeConnectionFactoryRemoved(
 			@UIEventTopic("REMOVED_CONNECTION_FACTORY_SERVICE") IControlConnectionFactory connectionFactory) {
-		this.canActivate = false;
 		this.connectionFactory = null;
+		canActivate();
+	}
+	
+	@Inject
+	@Optional
+	private void subscribeModelSIPAdded(
+			@UIEventTopic("ADDED_MODEL_SIP_SERVICE") IModelSIP modelSIP) {
+		this.modelSIP = modelSIP;
+		canActivate();
+	}
+
+	@Inject
+	@Optional
+	private void subscribeModelSIPRemoved(
+			@UIEventTopic("REMOVED_MODEL_SIP_SERVICE") IModelSIP modelSIP) {
+		this.modelSIP = null;
+		canActivate();
 	}
 
 }
