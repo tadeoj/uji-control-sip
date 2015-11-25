@@ -96,7 +96,7 @@ public class UpdateModelHandler {
 		job.schedule();
 
 	}
-
+	
 	@CanExecute
 	public boolean canExecute() {
 		return canActivate;
