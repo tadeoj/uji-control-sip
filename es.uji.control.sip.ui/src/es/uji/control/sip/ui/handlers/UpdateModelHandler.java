@@ -20,7 +20,6 @@ import org.eclipse.swt.widgets.Shell;
 
 import es.uji.control.domain.people.IPerson;
 import es.uji.control.domain.provider.service.connectionfactory.ControlConnectionException;
-import es.uji.control.domain.provider.service.connectionfactory.ControlNotImplementedException;
 import es.uji.control.domain.provider.service.connectionfactory.IControlConnection;
 import es.uji.control.domain.provider.service.connectionfactory.IControlConnectionFactory;
 import es.uji.control.domain.provider.subsystem.people.IPersonStream;
@@ -86,9 +85,6 @@ public class UpdateModelHandler {
 					});
 
 				} catch (ControlConnectionException e) {
-					MessageDialog.openError(shell, "Error", e.getMessage());
-					return Status.CANCEL_STATUS;
-				} catch (ControlNotImplementedException e) {
 					MessageDialog.openError(shell, "Error", e.getMessage());
 					return Status.CANCEL_STATUS;
 				}
