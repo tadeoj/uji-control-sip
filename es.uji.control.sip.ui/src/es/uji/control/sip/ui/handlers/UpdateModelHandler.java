@@ -39,7 +39,7 @@ public class UpdateModelHandler {
 		Job job = new Job("Carga del modelo") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
-				modelSIP.updateModelFromBackend(t -> System.out.println(t.toString()));
+				modelSIP.updateModelFromBackend();
 				return Status.OK_STATUS;
 			}
 		};
