@@ -1,8 +1,5 @@
 package es.uji.control.sip.ui.handlers;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -15,14 +12,9 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.services.IServiceConstants;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
-import es.uji.control.domain.people.IPerson;
-import es.uji.control.domain.provider.service.connectionfactory.ControlConnectionException;
-import es.uji.control.domain.provider.service.connectionfactory.IControlConnection;
 import es.uji.control.domain.provider.service.connectionfactory.IControlConnectionFactory;
-import es.uji.control.domain.provider.subsystem.people.IPersonStream;
 import es.uji.control.model.sip.IModelSIP;
 import es.uji.control.sip.ui.Activator;
 
@@ -48,57 +40,15 @@ public class UpdateModelHandler {
 		Job job = new Job("Carga del modelo") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
-				try {
-					IControlConnection connection = connectionFactory.createConnection();
-					
-					System.out.println("-------------------------------------------------------");
-					System.out.println(String.format("Empieza la carga del modelo: %s", LocalDateTime.now().toString()));
-					System.out.println("-------------------------------------------------------");
-					
-					connection.getPersonService().getAllPersons(new IPersonStream() {
-					int numPersons = 0;
-						
-						@Override
-						public void onNext(List<IPerson> persons) {
-							int size = persons.size();
-							System.out.println("-------------------------------------------------------");
-							System.out.println(size);
-							System.out.println(String.format("DNI:%s, Nombre:%s, Apellidos:%s %s ",
-									persons.get(size-1).getIdentification(),
-									persons.get(size-1).getName(),
-									persons.get(size-1).getFirstLastName(),
-									persons.get(size-1).getSecondLastName()));
-							System.out.println("-------------------------------------------------------");
-							numPersons = numPersons + size;
-						}
-
-						@Override
-						public void onError(Throwable t) {
-							System.out.println("----------------------ERROR----------------------------");
-						}
-
-						@Override
-						public void onCompleted() {
-							System.out.println("-------------------------------------------------------");
-							System.out.println(String.format("Finaliza la carga del modelo: %s", LocalDateTime.now().toString()));
-							System.out.println(String.format("Actualmente se han cargado %d personas", numPersons));
-							System.out.println("-------------------------------------------------------");
-						}
-					});
-
-				} catch (ControlConnectionException e) {
-					MessageDialog.openError(shell, "Error", e.getMessage());
-					return Status.CANCEL_STATUS;
-				}
-
+				modelSIP.updateModelFromBackend(t -> System.out.println(t.toString()));
 				return Status.OK_STATUS;
 			}
-
 		};
 		job.schedule();
+		// MessageDialog.openError(shell, "Error", e.getMessage());
 
 	}
-	
+
 	@CanExecute
 	public boolean canExecute() {
 		return canActivate();
@@ -111,35 +61,31 @@ public class UpdateModelHandler {
 			return false;
 		}
 	}
-	
+
 	@Inject
 	@Optional
-	private void subscribeConnectionFactoryAdded(
-			@UIEventTopic("ADDED_CONNECTION_FACTORY_SERVICE") IControlConnectionFactory connectionFactory) {
+	private void subscribeConnectionFactoryAdded(@UIEventTopic("ADDED_CONNECTION_FACTORY_SERVICE") IControlConnectionFactory connectionFactory) {
 		this.connectionFactory = connectionFactory;
 		canActivate();
 	}
 
 	@Inject
 	@Optional
-	private void subscribeConnectionFactoryRemoved(
-			@UIEventTopic("REMOVED_CONNECTION_FACTORY_SERVICE") IControlConnectionFactory connectionFactory) {
+	private void subscribeConnectionFactoryRemoved(@UIEventTopic("REMOVED_CONNECTION_FACTORY_SERVICE") IControlConnectionFactory connectionFactory) {
 		this.connectionFactory = null;
 		canActivate();
 	}
-	
+
 	@Inject
 	@Optional
-	private void subscribeModelSIPAdded(
-			@UIEventTopic("ADDED_MODEL_SIP_SERVICE") IModelSIP modelSIP) {
+	private void subscribeModelSIPAdded(@UIEventTopic("ADDED_MODEL_SIP_SERVICE") IModelSIP modelSIP) {
 		this.modelSIP = modelSIP;
 		canActivate();
 	}
 
 	@Inject
 	@Optional
-	private void subscribeModelSIPRemoved(
-			@UIEventTopic("REMOVED_MODEL_SIP_SERVICE") IModelSIP modelSIP) {
+	private void subscribeModelSIPRemoved(@UIEventTopic("REMOVED_MODEL_SIP_SERVICE") IModelSIP modelSIP) {
 		this.modelSIP = null;
 		canActivate();
 	}
