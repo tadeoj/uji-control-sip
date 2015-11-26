@@ -42,6 +42,8 @@ public class SIPSelectorPreferencesPage extends FieldEditorPreferencePage {
 
 	}
 	
+	
+	//TODO: Investigar comportamiento 
 	public String getSelectedValue() { 
 		return combo.getPreferenceStore().getString(combo.getPreferenceName());
 	}

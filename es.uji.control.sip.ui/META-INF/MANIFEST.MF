@@ -22,5 +22,5 @@ Require-Bundle: javax.inject;bundle-version="1.0.0",
  es.uji.control.domain.provider;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Activator: es.uji.control.sip.ui.Activator
-Bundle-ActivationPolicy: lazy
 Import-Package: es.uji.control.model.sip
+Bundle-ActivationPolicy: lazy
