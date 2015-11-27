@@ -6,8 +6,10 @@ import javax.inject.Named;
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.e4.ui.workbench.UIEvents;
 import org.eclipse.swt.widgets.Shell;
 
 import es.uji.control.domain.provider.service.connectionfactory.IControlConnectionFactory;
@@ -16,16 +18,18 @@ import es.uji.control.sip.ui.Activator;
 
 public class UpdateModelHandler {
 
+	private IEventBroker eventBroker; 
 	private IControlConnectionFactory connectionFactory;
 	private IModel modelSIP;
 	private Shell shell;
 	private boolean updating = true;
 	
 	@Inject
-	public UpdateModelHandler(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell) {
+	public UpdateModelHandler(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell, IEventBroker eventBroker) {
 		
 		// Inyeccion
 		this.shell = shell;
+		this.eventBroker = eventBroker;
 		
 		// Servicios OSGI
 		this.connectionFactory = Activator.controlConnectionFactoryServiceTracker.getConnectionFactory();
@@ -39,8 +43,8 @@ public class UpdateModelHandler {
 	private void setUpdating(Boolean updating) {
 		// Se actualiza el estado
 		this.updating = updating;
-		// Se fuera al UI a actualizarse
-		// TODO: ddd
+		// Se fuerza al UI a actualizarse
+		eventBroker.send(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC, UIEvents.ALL_ELEMENT_ID);
 	}
 
 	@Execute
