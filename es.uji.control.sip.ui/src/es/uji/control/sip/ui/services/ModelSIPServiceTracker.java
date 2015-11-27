@@ -5,23 +5,23 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 
-import es.uji.control.model.sip.IModelSIP;
+import es.uji.control.model.sip.IModel;
 
-public class ModelSIPServiceTracker extends ServiceTracker<IModelSIP, Object> {
+public class ModelSIPServiceTracker extends ServiceTracker<IModel, Object> {
 
 	private BundleContext context;
-	private IModelSIP modelSIP;
+	private IModel modelSIP;
 	private IEventBroker eventBroker;
 	
 	public ModelSIPServiceTracker(BundleContext context) {
-		super(context, IModelSIP.class, null);
+		super(context, IModel.class, null);
 		this.context = context;
 	}
 	
 	@Override
-	synchronized public Object addingService(ServiceReference<IModelSIP> reference) {
+	synchronized public Object addingService(ServiceReference<IModel> reference) {
 		if (modelSIP == null) {
-			modelSIP = (IModelSIP) context.getService(reference);
+			modelSIP = (IModel) context.getService(reference);
 			modelSIP.setEventsConsumer((t)->System.out.println(t.toString()));
 			eventBroker.send(ServiceEventsEnum.ADDED_MODEL_SIP_SERVICE.toString(), modelSIP);
 			return modelSIP;
@@ -31,12 +31,12 @@ public class ModelSIPServiceTracker extends ServiceTracker<IModelSIP, Object> {
 	}
 
 	@Override
-	synchronized public void removedService(ServiceReference<IModelSIP> reference, Object service) {
+	synchronized public void removedService(ServiceReference<IModel> reference, Object service) {
 		modelSIP = null;
 		eventBroker.send(ServiceEventsEnum.REMOVED_MODEL_SIP_SERVICE.toString(), modelSIP);
 	}
 	
-	public IModelSIP getModelSIP() {
+	public IModel getModelSIP() {
 		return modelSIP;
 	}
 	

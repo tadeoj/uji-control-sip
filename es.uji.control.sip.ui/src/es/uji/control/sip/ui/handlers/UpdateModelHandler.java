@@ -15,13 +15,13 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.swt.widgets.Shell;
 
 import es.uji.control.domain.provider.service.connectionfactory.IControlConnectionFactory;
-import es.uji.control.model.sip.IModelSIP;
+import es.uji.control.model.sip.IModel;
 import es.uji.control.sip.ui.Activator;
 
 public class UpdateModelHandler {
 
 	private IControlConnectionFactory connectionFactory;
-	private IModelSIP modelSIP;
+	private IModel modelSIP;
 	private Shell shell;
 	private boolean isActive = false;
 	
@@ -81,7 +81,7 @@ public class UpdateModelHandler {
 
 	@Inject
 	@Optional
-	private void subscribeModelSIPAdded(@UIEventTopic("ADDED_MODEL_SIP_SERVICE") IModelSIP modelSIP) {
+	private void subscribeModelSIPAdded(@UIEventTopic("ADDED_MODEL_SIP_SERVICE") IModel modelSIP) {
 		synchronized (this) {
 			this.modelSIP = modelSIP;
 			canActivate();
@@ -90,7 +90,7 @@ public class UpdateModelHandler {
 
 	@Inject
 	@Optional
-	private void subscribeModelSIPRemoved(@UIEventTopic("REMOVED_MODEL_SIP_SERVICE") IModelSIP modelSIP) {
+	private void subscribeModelSIPRemoved(@UIEventTopic("REMOVED_MODEL_SIP_SERVICE") IModel modelSIP) {
 		synchronized (this) {
 			this.modelSIP = null;
 			canActivate();
