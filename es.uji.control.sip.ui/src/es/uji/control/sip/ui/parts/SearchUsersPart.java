@@ -10,7 +10,6 @@ package es.uji.control.sip.ui.parts;
 import javax.inject.Inject;
 
 import org.eclipse.e4.ui.di.Focus;
-import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -39,9 +38,6 @@ public class SearchUsersPart {
 	private Button clean;
 	
 	private Table listUsers;
-	
-	@Inject
-	private ESelectionService selectionService;
 	
 	@Inject
 	public SearchUsersPart(Composite parent) {

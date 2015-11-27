@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_6wlLcMgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.application" bindingContexts="_6wlLecgZEeSyMNYR5xypkQ">
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_6wlLcMgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.application" bindingContexts="_6wlLecgZEeSyMNYR5xypkQ">
   <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.window.id" label="SIP UJI" width="800" height="800">
-    <children xsi:type="advanced:PerspectiveStack" xmi:id="_6wlLkMgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.window.perspectiveStack.id">
-      <children xsi:type="advanced:Perspective" xmi:id="_6wlLkcgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.window.perspective.id">
-        <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.partSash.id" selectedElement="_6wlLk8gZEeSyMNYR5xypkQ" horizontal="true">
-          <children xsi:type="basic:PartStack" xmi:id="_6wlLk8gZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.partStack.id">
-            <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" accessibilityPhrase="" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.parts.SearchUsersPart" label="Buscador de usuarios"/>
-          </children>
-        </children>
-      </children>
+    <children xsi:type="basic:PartStack" xmi:id="_n7KAkJUMEeWfWNbsRVvY4g" elementId="es.uji.control.sip.ui.partstack.0" selectedElement="_6wlLlMgZEeSyMNYR5xypkQ">
+      <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.partStack.part.searchUsers.id" accessibilityPhrase="" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.parts.SearchUsersPart" label="Buscador de usuarios"/>
     </children>
     <trimBars xmi:id="_6wlLlcgZEeSyMNYR5xypkQ">
       <children xsi:type="menu:ToolBar" xmi:id="_6wlLlsgZEeSyMNYR5xypkQ" elementId="toolbar:org.eclipse.ui.main.toolbar">
         <children xsi:type="menu:HandledToolItem" xmi:id="_yZHwwGzqEeWRBJTWZWHwtA" elementId="es.uji.control.sip.ui.handledtoolitem.preferences" label="Preferences" command="_t8UOQGzqEeWRBJTWZWHwtA"/>
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_eFqE4HJLEeWv4dHJNTTlPw" elementId="es.uji.control.sip.ui.toolbarseparator.0"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_dWNk8HJLEeWv4dHJNTTlPw" elementId="es.uji.control.sip.ui.handledtoolitem.addPart" label="Añadir vista" command="_W_t88HJLEeWv4dHJNTTlPw"/>
-        <children xsi:type="menu:ToolBarSeparator" xmi:id="_Z2VAQIO7EeWPQbut-vlbVg" elementId="es.uji.control.sip.ui.toolbarseparator.1"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_aiMAsIO7EeWPQbut-vlbVg" elementId="es.uji.control.sip.ui.handledtoolitem.actualizarmodelo" label="Actualizar Modelo" command="_Hp9VQIOhEeWlHvik4xu1Sw"/>
       </children>
     </trimBars>
