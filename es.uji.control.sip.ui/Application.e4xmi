@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_6wlLcMgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.application" bindingContexts="_6wlLecgZEeSyMNYR5xypkQ">
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_6wlLcMgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.application" bindingContexts="_6wlLecgZEeSyMNYR5xypkQ">
   <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.window.id" label="SIP UJI" width="800" height="800">
-    <children xsi:type="basic:PartStack" xmi:id="_n7KAkJUMEeWfWNbsRVvY4g" elementId="es.uji.control.sip.ui.partstack.0" selectedElement="_6wlLlMgZEeSyMNYR5xypkQ">
-      <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.partStack.part.searchUsers.id" accessibilityPhrase="" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.parts.SearchUsersPart" label="Buscador de usuarios"/>
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_-kMMIJc_EeW2R7ypmXWuZQ" elementId="es.uji.control.sip.ui.perspectivestack.0">
+      <children xsi:type="advanced:Perspective" xmi:id="__l7V8Jc_EeW2R7ypmXWuZQ" elementId="es.uji.control.sip.ui.perspective.0">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_D4_GkJdAEeW2R7ypmXWuZQ" elementId="es.uji.control.sip.ui.partsashcontainer.0">
+          <children xsi:type="basic:PartStack" xmi:id="_JxaSgJdAEeW2R7ypmXWuZQ" elementId="es.uji.control.sip.ui.partstack.0">
+            <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.partStack.part.searchUsers.id" accessibilityPhrase="" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.parts.SearchUsersPart" label="Buscador de usuarios"/>
+          </children>
+        </children>
+      </children>
     </children>
+    <mainMenu xmi:id="_-fDYAJdAEeW2R7ypmXWuZQ" elementId="es.uji.control.sip.ui.menu.0"/>
     <trimBars xmi:id="_6wlLlcgZEeSyMNYR5xypkQ">
       <children xsi:type="menu:ToolBar" xmi:id="_6wlLlsgZEeSyMNYR5xypkQ" elementId="toolbar:org.eclipse.ui.main.toolbar">
         <children xsi:type="menu:HandledToolItem" xmi:id="_yZHwwGzqEeWRBJTWZWHwtA" elementId="es.uji.control.sip.ui.handledtoolitem.preferences" label="Preferences" command="_t8UOQGzqEeWRBJTWZWHwtA"/>
@@ -13,15 +20,12 @@
     </trimBars>
   </children>
   <handlers xmi:id="_kuX4AGzqEeWRBJTWZWHwtA" elementId="es.uji.control.sip.ui.handler.preferences" contributionURI="bundleclass://com.opcoach.e4.preferences/com.opcoach.e4.preferences.handlers.E4PreferencesHandler" command="_t8UOQGzqEeWRBJTWZWHwtA"/>
-  <handlers xmi:id="_Lxl3oHJLEeWv4dHJNTTlPw" elementId="es.uji.control.sip.ui.handler.addPart" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.handlers.AddPartHandler" command="_W_t88HJLEeWv4dHJNTTlPw"/>
   <handlers xmi:id="_TuAXIIO7EeWPQbut-vlbVg" elementId="es.uji.control.sip.ui.handler.updateModel" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.handlers.UpdateModelHandler" command="_Hp9VQIOhEeWlHvik4xu1Sw"/>
-  <bindingTables xmi:id="_6wlLfsgZEeSyMNYR5xypkQ" bindingContext="_6wlLecgZEeSyMNYR5xypkQ"/>
   <rootContext xmi:id="_6wlLecgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
     <children xmi:id="_6wlLesgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
     <children xmi:id="_6wlLe8gZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
   </rootContext>
   <commands xmi:id="_t8UOQGzqEeWRBJTWZWHwtA" elementId="org.eclipse.ui.window.preferences" commandName="Preferences"/>
-  <commands xmi:id="_W_t88HJLEeWv4dHJNTTlPw" elementId="es.uji.control.sip.ui.command.addPart" commandName="Añadir vista"/>
   <commands xmi:id="_Hp9VQIOhEeWlHvik4xu1Sw" elementId="es.uji.control.sip.ui.command.updateModel" commandName="Actualizar modelo"/>
   <addons xmi:id="_6wlLcsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_6wlLc8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>

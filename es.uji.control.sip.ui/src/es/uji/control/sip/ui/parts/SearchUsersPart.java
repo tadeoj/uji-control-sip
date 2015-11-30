@@ -7,7 +7,7 @@
  *******************************************************************************/
 package es.uji.control.sip.ui.parts;
 
-import javax.inject.Inject;
+import javax.annotation.PostConstruct;
 
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.jface.layout.GridDataFactory;
@@ -39,8 +39,8 @@ public class SearchUsersPart {
 	
 	private Table listUsers;
 	
-	@Inject
-	public SearchUsersPart(Composite parent) {
+	@PostConstruct
+	public void createComposite(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
 		
 		Composite banner = createBanner(parent);
