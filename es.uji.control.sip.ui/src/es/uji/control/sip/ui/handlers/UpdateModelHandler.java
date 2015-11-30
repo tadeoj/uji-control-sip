@@ -7,6 +7,7 @@ import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.UIEvents;
@@ -17,7 +18,10 @@ import es.uji.control.model.sip.IModel;
 import es.uji.control.sip.ui.Activator;
 
 public class UpdateModelHandler {
-
+	
+	@Inject
+	private Logger logger;
+	
 	private IEventBroker eventBroker; 
 	private IControlConnectionFactory connectionFactory;
 	private IModel modelSIP;
@@ -49,17 +53,8 @@ public class UpdateModelHandler {
 
 	@Execute
 	public void execute() {
-		
+		logger.info("Empieza la carga del modelo.");
 		modelSIP.updateModelFromBackend();
-
-//		Job job = new Job("Carga del modelo") {
-//			@Override
-//			protected IStatus run(IProgressMonitor monitor) {
-//				modelSIP.updateModelFromBackend();
-//				return Status.OK_STATUS;
-//			}
-//		};
-//		job.schedule();
 	}
 
 	@CanExecute
