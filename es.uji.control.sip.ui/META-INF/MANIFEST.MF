@@ -19,7 +19,9 @@ Require-Bundle: javax.inject;bundle-version="1.0.0",
  org.eclipse.e4.core.di.extensions,
  org.eclipse.e4.core.services;bundle-version="2.0.0",
  es.uji.control.domain;bundle-version="1.0.0",
- es.uji.control.domain.provider;bundle-version="1.0.0"
+ es.uji.control.domain.provider;bundle-version="1.0.0",
+ org.eclipse.core.databinding;bundle-version="1.5.0",
+ org.eclipse.jface.databinding;bundle-version="1.7.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Activator: es.uji.control.sip.ui.Activator
 Import-Package: es.uji.control.model.sip

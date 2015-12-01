@@ -98,7 +98,6 @@ public class SearchUsersPart {
 		return banner;
 	}
 	
-	
 	private Composite createUsers(Composite parent) {
 		
 		Composite users = new Composite(parent, SWT.NONE);

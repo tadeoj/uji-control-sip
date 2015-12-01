@@ -7,13 +7,16 @@
           <children xsi:type="basic:PartStack" xmi:id="_JxaSgJdAEeW2R7ypmXWuZQ" elementId="es.uji.control.sip.ui.partstack.0">
             <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.partStack.part.searchUsers.id" accessibilityPhrase="" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.parts.SearchUsersPart" label="Buscador de usuarios"/>
           </children>
+          <children xsi:type="basic:PartStack" xmi:id="_yn7NYJgOEeWsooNpk7QaIw" elementId="es.uji.control.sip.ui.partstack.1">
+            <children xsi:type="basic:Part" xmi:id="_Rw4w0JgMEeWsooNpk7QaIw" elementId="es.uji.control.sip.ui.partStack.part.eventGrid.id" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.parts.EventGridPart" label="Consola"/>
+          </children>
         </children>
       </children>
     </children>
     <mainMenu xmi:id="_-fDYAJdAEeW2R7ypmXWuZQ" elementId="es.uji.control.sip.ui.menu.0"/>
     <trimBars xmi:id="_6wlLlcgZEeSyMNYR5xypkQ">
       <children xsi:type="menu:ToolBar" xmi:id="_6wlLlsgZEeSyMNYR5xypkQ" elementId="toolbar:org.eclipse.ui.main.toolbar">
-        <children xsi:type="menu:HandledToolItem" xmi:id="_yZHwwGzqEeWRBJTWZWHwtA" elementId="es.uji.control.sip.ui.handledtoolitem.preferences" label="Preferences" command="_t8UOQGzqEeWRBJTWZWHwtA"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_yZHwwGzqEeWRBJTWZWHwtA" elementId="es.uji.control.sip.ui.handledtoolitem.preferences" label="Preferencias" command="_t8UOQGzqEeWRBJTWZWHwtA"/>
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_eFqE4HJLEeWv4dHJNTTlPw" elementId="es.uji.control.sip.ui.toolbarseparator.0"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_aiMAsIO7EeWPQbut-vlbVg" elementId="es.uji.control.sip.ui.handledtoolitem.actualizarmodelo" label="Actualizar Modelo" command="_Hp9VQIOhEeWlHvik4xu1Sw"/>
       </children>
