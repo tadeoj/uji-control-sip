@@ -22,7 +22,6 @@ public class ModelSIPServiceTracker extends ServiceTracker<IModel, Object> {
 	synchronized public Object addingService(ServiceReference<IModel> reference) {
 		if (modelSIP == null) {
 			modelSIP = (IModel) context.getService(reference);
-			modelSIP.setLogger((t)->System.out.println(t.toString()));
 			eventBroker.send(ServiceEventsEnum.ADDED_MODEL_SIP_SERVICE.toString(), modelSIP);
 			return modelSIP;
 		} else {

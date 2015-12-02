@@ -5,17 +5,13 @@ import javax.inject.Named;
 
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
-import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.core.services.log.Logger;
-import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.UIEvents;
 import org.eclipse.swt.widgets.Shell;
 
-import es.uji.control.domain.provider.service.connectionfactory.IControlConnectionFactory;
 import es.uji.control.model.sip.IModel;
-import es.uji.control.sip.ui.Activator;
 
 public class UpdateModelHandler {
 	
@@ -23,25 +19,21 @@ public class UpdateModelHandler {
 	private Logger logger;
 	
 	private IEventBroker eventBroker; 
-	private IControlConnectionFactory connectionFactory;
 	private IModel modelSIP;
 	private Shell shell;
 	private boolean updating = true;
 	
 	@Inject
-	public UpdateModelHandler(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell, IEventBroker eventBroker) {
-		
+	public UpdateModelHandler(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell, IEventBroker eventBroker, IModel modelSIP) {
 		// Inyeccion
 		this.shell = shell;
 		this.eventBroker = eventBroker;
 		
 		// Servicios OSGI
-		this.connectionFactory = Activator.controlConnectionFactoryServiceTracker.getConnectionFactory();
-		this.modelSIP = Activator.modelSIPServiceTracker.getModelSIP();
+		this.modelSIP = modelSIP;
 		
 		// Inicializacion del estado de la actualizacion
-		modelSIP.setUpdateModelUpdatingTracker(this::setUpdating);
-		
+		this.modelSIP.setUpdateModelUpdatingTracker(this::setUpdating);
 	}
 	
 	private void setUpdating(Boolean updating) {
@@ -60,38 +52,6 @@ public class UpdateModelHandler {
 	@CanExecute
 	public boolean canExecute() {
 		return !updating;
-	}
-
-	@Inject
-	@Optional
-	private void subscribeConnectionFactoryAdded(@UIEventTopic("ADDED_CONNECTION_FACTORY_SERVICE") IControlConnectionFactory connectionFactory) {
-		synchronized (this) {
-			this.connectionFactory = connectionFactory;
-		}	
-	}
-
-	@Inject
-	@Optional
-	private void subscribeConnectionFactoryRemoved(@UIEventTopic("REMOVED_CONNECTION_FACTORY_SERVICE") IControlConnectionFactory connectionFactory) {
-		synchronized (this) {
-			this.connectionFactory = null;
-		}
-	}
-
-	@Inject
-	@Optional
-	private void subscribeModelSIPAdded(@UIEventTopic("ADDED_MODEL_SIP_SERVICE") IModel modelSIP) {
-		synchronized (this) {
-			this.modelSIP = modelSIP;
-		}
-	}
-
-	@Inject
-	@Optional
-	private void subscribeModelSIPRemoved(@UIEventTopic("REMOVED_MODEL_SIP_SERVICE") IModel modelSIP) {
-		synchronized (this) {
-			this.modelSIP = null;
-		}
 	}
 
 }

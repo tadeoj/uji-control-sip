@@ -1,17 +1,13 @@
 package es.uji.control.sip.ui.parts;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
+import java.util.function.Consumer;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.di.UISynchronize;
+import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
@@ -22,6 +18,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 import es.uji.control.model.sip.IModel;
+import es.uji.control.model.sip.ModelLogEntry;
 import es.uji.control.sip.ui.model.EventGridEntry;
 import es.uji.control.sip.ui.model.EventGridManager;
 
@@ -31,23 +28,26 @@ public class EventGridPart {
 	private Table table;
 	private EventGridManager manager;
 	private IModel modelSIP;
-	
-	@Inject 
+
+	@Inject
 	private UISynchronize sync;
 
 	@PostConstruct
-	public void createComposite(Composite parent) {
-		manager = new EventGridManager(new ArrayList<>(1));
+	public void createComposite(Composite parent, IModel modelSIP) {
+		manager = new EventGridManager();
 		parent.setLayout(new GridLayout(1, false));
-	
+
 		Composite grid = createGrid(parent);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(grid);
+
+		this.modelSIP = modelSIP;
 
 		createManagerUpdater();
 	}
 
 	private Composite createGrid(Composite parent) {
 		Composite users = new Composite(parent, SWT.NONE);
+		users.setLayout(new GridLayout(1, false));
 
 		viewer = new TableViewer(users, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.V_SCROLL);
 
@@ -56,9 +56,10 @@ public class EventGridPart {
 		table = viewer.getTable();
 		table.setLinesVisible(false);
 		table.setHeaderVisible(true);
-		
-	    viewer.setContentProvider(new ArrayContentProvider());
-	    viewer.setInput(manager.getCollection());
+		table.setVisible(true);
+
+		viewer.setContentProvider(new ObservableListContentProvider());
+		viewer.setInput(manager.getCollection());
 
 		GridDataFactory.fillDefaults().grab(true, true).align(SWT.FILL, SWT.FILL).applyTo(table);
 
@@ -67,14 +68,14 @@ public class EventGridPart {
 
 	private void createColumns() {
 		String[] titles = { "Instant", "Source", "Type", "Message" };
-		int[] bounds = { 100, 100, 100, 500 };
+		int[] bounds = { 180, 100, 100, 370 };
 
 		TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				EventGridEntry e = (EventGridEntry) element;
-				return e.getInstant().toString();
+				return e.getInstant();
 			}
 		});
 
@@ -104,6 +105,7 @@ public class EventGridPart {
 				return e.getMsg();
 			}
 		});
+
 	}
 
 	private TableViewerColumn createTableViewerColumn(String title, int bound, final int colNumber) {
@@ -117,34 +119,25 @@ public class EventGridPart {
 	}
 
 	private void createManagerUpdater() {
-		manager.addPropertyChangeListener(new PropertyChangeListener() {
-			
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				sync.asyncExec(() -> viewer.setInput(manager.getCollection()));
-			}
-		});
-		
-		if (modelSIP != null) {
-			modelSIP.setLogger((e)-> manager.addEventGridEntry(new EventGridEntry(e)));
-		}
-		
-	}
-	
-	@Inject
-	@Optional
-	private void subscribeModelSIPAdded(@UIEventTopic("ADDED_MODEL_SIP_SERVICE") IModel modelSIP) {
-		synchronized (this) {
-			this.modelSIP = modelSIP;
-		}
-	}
 
-	@Inject
-	@Optional
-	private void subscribeModelSIPRemoved(@UIEventTopic("REMOVED_MODEL_SIP_SERVICE") IModel modelSIP) {
-		synchronized (this) {
-			this.modelSIP = null;
+		if (modelSIP != null) {
+			modelSIP.setLogger(new Consumer<ModelLogEntry>() {
+
+				@Override
+				public void accept(ModelLogEntry t) {
+					sync.asyncExec(new Runnable() {
+
+						@Override
+						public void run() {
+							manager.addEventGridEntry(new EventGridEntry(t));
+							table.setSelection(manager.getLastElementPosition());
+						}
+					});
+				}
+			});
+
 		}
+
 	}
 
 }

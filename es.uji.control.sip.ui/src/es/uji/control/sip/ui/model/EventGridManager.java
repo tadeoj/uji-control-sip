@@ -2,7 +2,9 @@ package es.uji.control.sip.ui.model;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.List;
+
+import org.eclipse.core.databinding.observable.list.IObservableList;
+import org.eclipse.core.databinding.observable.list.WritableList;
 
 public class EventGridManager {
 	
@@ -11,25 +13,21 @@ public class EventGridManager {
 	public static final String PROPERTY_SIZE_EVENT_GRID = "SIZE_EVENT_GRID";
 		
 	private PropertyChangeSupport propertyChangeSupport;
-	private List<EventGridEntry> eventGridList;
-	private int size = 40;
+	private IObservableList collection;
+	private int size = 500;
 
-	public EventGridManager(List<EventGridEntry> eventGridList) {
+	public EventGridManager() {
+		collection = new WritableList();
 		propertyChangeSupport = new PropertyChangeSupport(this);
-		setCollection(eventGridList);
 	}
 
 	public void clean() {
-		eventGridList.clear();
-		propertyChangeSupport.firePropertyChange(PROPERTY_CLEAR_EVENT_GRID, eventGridList, null);
+		collection.clear();
+		propertyChangeSupport.firePropertyChange(PROPERTY_CLEAR_EVENT_GRID, collection, null);
 	}
 	
-	public List<EventGridEntry> getCollection() {
-		return eventGridList;
-	}
-	
-	public void setCollection(List<EventGridEntry> eventGridList) {
-		this.eventGridList = eventGridList;
+	public IObservableList getCollection() {
+		return collection;
 	}
 	
 	public int getSizeCollection() {
@@ -38,17 +36,21 @@ public class EventGridManager {
 	
 	public void setSizeCollection(int size) {
 		this.size = size;
-		propertyChangeSupport.firePropertyChange(PROPERTY_SIZE_EVENT_GRID, eventGridList, null);
+		propertyChangeSupport.firePropertyChange(PROPERTY_SIZE_EVENT_GRID, collection, null);
+	}
+	
+	public int getLastElementPosition() {
+		return collection.size()-1;
 	}
 	
 	public void addEventGridEntry(EventGridEntry eventGrid) {
-		if (eventGridList.size() < size) {
-			eventGridList.add(eventGrid);
-			propertyChangeSupport.firePropertyChange(PROPERTY_NEW_EVENT_GRID, eventGridList, eventGrid);
+		if (collection.size() < size) {
+			collection.add(eventGrid);
+			propertyChangeSupport.firePropertyChange(PROPERTY_NEW_EVENT_GRID, collection, eventGrid);
 		} else {
-			eventGridList.remove(0);
-			eventGridList.add(eventGrid);
-			propertyChangeSupport.firePropertyChange(PROPERTY_NEW_EVENT_GRID, eventGridList, eventGrid);
+			collection.remove(0);
+			collection.add(eventGrid);
+			propertyChangeSupport.firePropertyChange(PROPERTY_NEW_EVENT_GRID, collection, eventGrid);
 		}
 	}
 	
