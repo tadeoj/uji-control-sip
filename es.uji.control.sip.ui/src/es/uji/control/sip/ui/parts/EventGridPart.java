@@ -46,10 +46,10 @@ public class EventGridPart {
 	}
 
 	private Composite createGrid(Composite parent) {
-		Composite users = new Composite(parent, SWT.NONE);
-		users.setLayout(new GridLayout(1, false));
+		Composite tableGrid = new Composite(parent, SWT.NONE);
+		tableGrid.setLayout(new GridLayout(1, false));
 
-		viewer = new TableViewer(users, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.V_SCROLL);
+		viewer = new TableViewer(tableGrid, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.V_SCROLL);
 
 		createColumns();
 
@@ -63,7 +63,7 @@ public class EventGridPart {
 
 		GridDataFactory.fillDefaults().grab(true, true).align(SWT.FILL, SWT.FILL).applyTo(table);
 
-		return users;
+		return tableGrid;
 	}
 
 	private void createColumns() {
