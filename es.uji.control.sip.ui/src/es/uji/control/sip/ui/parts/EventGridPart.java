@@ -3,6 +3,7 @@ package es.uji.control.sip.ui.parts;
 import java.util.function.Consumer;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
 import org.eclipse.e4.ui.di.UISynchronize;
@@ -24,6 +25,8 @@ import es.uji.control.sip.ui.model.EventGridManager;
 
 public class EventGridPart {
 
+	static public final String ID = "es.uji.control.sip.ui.partStack.part.eventGrid.id";
+	
 	private TableViewer viewer;
 	private Table table;
 	private EventGridManager manager;
@@ -119,7 +122,6 @@ public class EventGridPart {
 	}
 
 	private void createManagerUpdater() {
-
 		if (modelSIP != null) {
 			modelSIP.setLogger(new Consumer<ModelLogEntry>() {
 
@@ -135,9 +137,11 @@ public class EventGridPart {
 					});
 				}
 			});
-
 		}
-
 	}
 
+	@PreDestroy
+	private void partDestroyed() {
+	}
+	
 }

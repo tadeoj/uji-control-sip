@@ -44,23 +44,19 @@ public class PersonQuery implements Predicate<IPerson> {
 		List<Boolean> result = new ArrayList<>(1);
 		
 		if (getName() != null && getName().length() > 0) {
-			Pattern patternName = Pattern.compile(getName(), Pattern.CASE_INSENSITIVE);
-			result.add(patternName.pattern().matches(t.getName()));
+			result.add(Pattern.compile(getName(), Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE).matcher(t.getName()).find());
 		}
 		
 		if (getFirstLastName() != null && getFirstLastName().length() > 0) {
-			Pattern patternFirstLastName = Pattern.compile(getFirstLastName(), Pattern.CASE_INSENSITIVE);
-			result.add(patternFirstLastName.pattern().matches(t.getFirstLastName()));
+			result.add(Pattern.compile(getFirstLastName(), Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE).matcher(t.getFirstLastName()).find());
 		}
 		
 		if (getSecondLastName() != null && getSecondLastName().length() > 0) {
-			Pattern patternSecondLastName = Pattern.compile(getSecondLastName(), Pattern.CASE_INSENSITIVE);
-			result.add(patternSecondLastName.pattern().matches(t.getSecondLastName()));
+			result.add(Pattern.compile(getSecondLastName(), Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE).matcher(t.getSecondLastName()).find());
 		}
 		
 		if (getIdentification() != null && getIdentification().length() > 0) {
-			Pattern patternIdentification = Pattern.compile(getIdentification(), Pattern.CASE_INSENSITIVE);
-			result.add(patternIdentification.pattern().matches(t.getIdentification()));
+			result.add(Pattern.compile(getIdentification(), Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE).matcher(t.getIdentification()).find());
 		}
 		
 		return result.size() == 0 ? false : result.stream().allMatch(p -> p);

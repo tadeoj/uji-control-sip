@@ -10,14 +10,21 @@ package es.uji.control.sip.ui.parts;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UISynchronize;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -44,6 +51,9 @@ public class SearchUsersPart {
 	@Inject
 	private UISynchronize sync;
 
+	@Inject
+	private IEventBroker eventBroker;
+
 	private IModel modelSIP;
 
 	private Label labelName;
@@ -65,11 +75,17 @@ public class SearchUsersPart {
 	private SearchUsersManager manager;
 	private EnterKeyPressed enterKeypressed;
 
+	private MPart userPart;
+	private MPart eventGridPart;
+
 	@PostConstruct
-	public void createComposite(Composite parent, IModel modelSIP) {
+	public void createComposite(Composite parent, IModel modelSIP, EPartService partService) {
 		this.modelSIP = modelSIP;
 		this.manager = new SearchUsersManager();
 		this.enterKeypressed = new EnterKeyPressed();
+		
+		userPart = partService.findPart(UserPart.ID);
+		eventGridPart = partService.findPart(EventGridPart.ID);
 
 		parent.setLayout(new GridLayout(1, false));
 
@@ -227,12 +243,30 @@ public class SearchUsersPart {
 						textFirstLastName.setText("");
 						textSecondLastName.setText("");
 						textDni.setText("");
+						eventBroker.send(PartsEnum.CLEAN_PERSON.toString(), true);
+						userPart.setVisible(false);
 					}
 				});
 			}
 		});
+
+		viewer.addDoubleClickListener(new IDoubleClickListener() {
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				sync.asyncExec(new Runnable() {
+					@Override
+					public void run() {						
+						userPart.setVisible(true);
+						IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+						Object firstElement = selection.getFirstElement();
+						eventBroker.send(PartsEnum.SELECT_PERSON.toString(), (IPerson) firstElement);
+					}
+				});
+			}
+		});
+
 	}
-	
+
 	private void searchUser() {
 		PersonQuery query = new PersonQuery(textName.getText(), textFirstLastName.getText(),
 				textSecondLastName.getText(), textDni.getText());
@@ -249,11 +283,11 @@ public class SearchUsersPart {
 			logger.error("Error al intentar buscar la persona en el emodelo EMF.");
 		}
 	}
-	
+
 	private class EnterKeyPressed implements KeyListener {
 
 		@Override
-		public void keyPressed(KeyEvent e) {	
+		public void keyPressed(KeyEvent e) {
 		}
 
 		@Override
@@ -262,12 +296,16 @@ public class SearchUsersPart {
 				searchUser();
 			}
 		}
-		
+
 	}
 
 	@Focus
 	void setFocus() {
 		textName.setFocus();
+	}
+
+	@PreDestroy
+	private void partDestroyed() {
 	}
 
 }

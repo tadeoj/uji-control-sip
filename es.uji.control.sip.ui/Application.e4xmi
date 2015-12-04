@@ -4,13 +4,11 @@
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_-kMMIJc_EeW2R7ypmXWuZQ" elementId="es.uji.control.sip.ui.perspectivestack.0">
       <children xsi:type="advanced:Perspective" xmi:id="__l7V8Jc_EeW2R7ypmXWuZQ" elementId="es.uji.control.sip.ui.perspective.0">
         <children xsi:type="basic:PartSashContainer" xmi:id="_D4_GkJdAEeW2R7ypmXWuZQ" elementId="es.uji.control.sip.ui.partsashcontainer.0">
-          <children xsi:type="basic:PartStack" xmi:id="_JxaSgJdAEeW2R7ypmXWuZQ" elementId="es.uji.control.sip.ui.partstack.0">
+          <children xsi:type="basic:PartStack" xmi:id="_JxaSgJdAEeW2R7ypmXWuZQ" elementId="es.uji.control.sip.ui.partstack.0" selectedElement="_6wlLlMgZEeSyMNYR5xypkQ">
             <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.partStack.part.searchUsers.id" accessibilityPhrase="" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.parts.SearchUsersPart" label="Buscador de usuarios"/>
             <children xsi:type="basic:Part" xmi:id="_Rw4w0JgMEeWsooNpk7QaIw" elementId="es.uji.control.sip.ui.partStack.part.eventGrid.id" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.parts.EventGridPart" label="Consola"/>
           </children>
-          <children xsi:type="basic:PartStack" xmi:id="_yn7NYJgOEeWsooNpk7QaIw" elementId="es.uji.control.sip.ui.partstack.1">
-            <children xsi:type="basic:Part" xmi:id="_vZv34JnUEeWrEYUgkTaNvw" elementId="es.uji.control.sip.ui.partStack.part.user.id" visible="false" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.parts.UserPart" label="Usuario"/>
-          </children>
+          <children xsi:type="basic:Part" xmi:id="_vZv34JnUEeWrEYUgkTaNvw" elementId="es.uji.control.sip.ui.partStack.part.user.id" visible="false" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.parts.UserPart" label="Usuario"/>
         </children>
       </children>
     </children>
