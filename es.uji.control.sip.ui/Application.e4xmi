@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_6wlLcMgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.application" bindingContexts="_6wlLecgZEeSyMNYR5xypkQ">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.window.id" label="SIP UJI" width="800" height="800">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.window.id" label="SIP UJI" width="1024" height="768">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_-kMMIJc_EeW2R7ypmXWuZQ" elementId="es.uji.control.sip.ui.perspectivestack.0">
       <children xsi:type="advanced:Perspective" xmi:id="__l7V8Jc_EeW2R7ypmXWuZQ" elementId="es.uji.control.sip.ui.perspective.0">
         <children xsi:type="basic:PartSashContainer" xmi:id="_D4_GkJdAEeW2R7ypmXWuZQ" elementId="es.uji.control.sip.ui.partsashcontainer.0">
@@ -8,7 +8,13 @@
             <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.partStack.part.searchUsers.id" accessibilityPhrase="" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.parts.SearchUsersPart" label="Buscador de usuarios"/>
             <children xsi:type="basic:Part" xmi:id="_Rw4w0JgMEeWsooNpk7QaIw" elementId="es.uji.control.sip.ui.partStack.part.eventGrid.id" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.parts.EventGridPart" label="Consola"/>
           </children>
-          <children xsi:type="basic:Part" xmi:id="_vZv34JnUEeWrEYUgkTaNvw" elementId="es.uji.control.sip.ui.partStack.part.user.id" visible="false" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.parts.UserPart" label="Usuario"/>
+          <children xsi:type="basic:PartSashContainer" xmi:id="_357soJ8sEeW8MtimmKJD2Q" elementId="es.uji.control.sip.ui.partsashcontainer.1" visible="false" horizontal="true">
+            <children xsi:type="basic:Part" xmi:id="_vZv34JnUEeWrEYUgkTaNvw" elementId="es.uji.control.sip.ui.partStack.part.user.id" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.parts.UserPart" label="Usuario"/>
+            <children xsi:type="basic:PartStack" xmi:id="_-FXUIJ8sEeW8MtimmKJD2Q" elementId="es.uji.control.sip.ui.partstack.1">
+              <children xsi:type="basic:Part" xmi:id="_PhOuEJ8tEeW8MtimmKJD2Q" elementId="es.uji.control.sip.ui.partStack.part.linkage.id" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.parts.LinkagesPart" label="Vinculos"/>
+              <children xsi:type="basic:Part" xmi:id="_QBb4IJ8tEeW8MtimmKJD2Q" elementId="es.uji.control.sip.ui.partStack.part.accreditations.id" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.parts.AccreditationsPart" label="Tarjetas"/>
+            </children>
+          </children>
         </children>
       </children>
     </children>

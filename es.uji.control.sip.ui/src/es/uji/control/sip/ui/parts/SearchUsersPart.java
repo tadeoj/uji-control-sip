@@ -17,14 +17,17 @@ import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UISynchronize;
-import org.eclipse.e4.ui.model.application.ui.basic.MPart;
-import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.model.application.ui.basic.MPartSashContainer;
+import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -45,6 +48,8 @@ import es.uji.control.sip.ui.model.SearchUsersManager;
 
 public class SearchUsersPart {
 
+	public static final String PART_SASH = "es.uji.control.sip.ui.partsashcontainer.1";
+	
 	@Inject
 	private Logger logger;
 
@@ -75,17 +80,15 @@ public class SearchUsersPart {
 	private SearchUsersManager manager;
 	private EnterKeyPressed enterKeypressed;
 
-	private MPart userPart;
-	private MPart eventGridPart;
+	private MPartSashContainer userPartSash;
 
 	@PostConstruct
-	public void createComposite(Composite parent, IModel modelSIP, EPartService partService) {
+	public void createComposite(Composite parent, IModel modelSIP, MApplication app, EModelService modelService) {
 		this.modelSIP = modelSIP;
 		this.manager = new SearchUsersManager();
 		this.enterKeypressed = new EnterKeyPressed();
 		
-		userPart = partService.findPart(UserPart.ID);
-		eventGridPart = partService.findPart(EventGridPart.ID);
+		userPartSash = (MPartSashContainer) modelService.find(PART_SASH, app);
 
 		parent.setLayout(new GridLayout(1, false));
 
@@ -244,19 +247,20 @@ public class SearchUsersPart {
 						textSecondLastName.setText("");
 						textDni.setText("");
 						eventBroker.send(PartsEnum.CLEAN_PERSON.toString(), true);
-						userPart.setVisible(false);
+						userPartSash.setVisible(false);
 					}
 				});
 			}
 		});
 
-		viewer.addDoubleClickListener(new IDoubleClickListener() {
+		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			
 			@Override
-			public void doubleClick(DoubleClickEvent event) {
+			public void selectionChanged(SelectionChangedEvent event) {
 				sync.asyncExec(new Runnable() {
 					@Override
 					public void run() {						
-						userPart.setVisible(true);
+						userPartSash.setVisible(true);
 						IStructuredSelection selection = (IStructuredSelection) event.getSelection();
 						Object firstElement = selection.getFirstElement();
 						eventBroker.send(PartsEnum.SELECT_PERSON.toString(), (IPerson) firstElement);
