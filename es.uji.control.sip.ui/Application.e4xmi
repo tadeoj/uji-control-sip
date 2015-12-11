@@ -19,11 +19,16 @@
       </children>
     </children>
     <mainMenu xmi:id="_-fDYAJdAEeW2R7ypmXWuZQ" elementId="es.uji.control.sip.ui.menu.0"/>
-    <trimBars xmi:id="_6wlLlcgZEeSyMNYR5xypkQ">
+    <trimBars xmi:id="_6wlLlcgZEeSyMNYR5xypkQ" elementId="es.uji.control.sip.ui.trimbar.0">
       <children xsi:type="menu:ToolBar" xmi:id="_6wlLlsgZEeSyMNYR5xypkQ" elementId="toolbar:org.eclipse.ui.main.toolbar">
         <children xsi:type="menu:HandledToolItem" xmi:id="_yZHwwGzqEeWRBJTWZWHwtA" elementId="es.uji.control.sip.ui.handledtoolitem.preferences" label="Preferencias" command="_t8UOQGzqEeWRBJTWZWHwtA"/>
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_eFqE4HJLEeWv4dHJNTTlPw" elementId="es.uji.control.sip.ui.toolbarseparator.0"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_aiMAsIO7EeWPQbut-vlbVg" elementId="es.uji.control.sip.ui.handledtoolitem.actualizarmodelo" label="Actualizar Modelo" command="_Hp9VQIOhEeWlHvik4xu1Sw"/>
+      </children>
+    </trimBars>
+    <trimBars xmi:id="_xXj0oKAEEeWKBfMk8xeyEQ" elementId="es.uji.control.sip.ui.trimbar.1" side="Bottom">
+      <children xsi:type="menu:ToolBar" xmi:id="_1syIcKAEEeWKBfMk8xeyEQ" elementId="es.uji.control.sip.ui.toolbar.0">
+        <children xsi:type="menu:ToolControl" xmi:id="_3C608KAEEeWKBfMk8xeyEQ" elementId="es.uji.control.sip.ui.toolcontrol.0" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.handlers.StatusBarControl"/>
       </children>
     </trimBars>
   </children>

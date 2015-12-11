@@ -2,10 +2,11 @@ package es.uji.control.sip.ui.parts;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UIEventTopic;
+import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -31,15 +32,13 @@ public class AccreditationsPart {
 	private TableViewer viewer;
 
 	@PostConstruct
-	public void createComposite(Composite parent) {
+	public void createComposite(Composite parent, @Optional @Named(IServiceConstants.ACTIVE_SELECTION) IPerson person) {
 		this.manager = new UserAccreditationManager();
 		parent.setLayout(new GridLayout(1, false));
 		Composite links = createLinks(parent);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(links);
-	}
-
-	@Focus
-	public void setFocus() {
+		
+		updatePerson(person);
 	}
 
 	private Composite createLinks(Composite parent) {
@@ -89,12 +88,16 @@ public class AccreditationsPart {
 		return viewerColumn;
 	}
 
-	@Inject
-	@Optional
-	private void setperson(@UIEventTopic("SELECT_PERSON") IPerson person) {
+	private void updatePerson(IPerson person) {
 		manager.clean();
 		if (person != null && person.getAccreditationsInfo() != null)
 		manager.setUserAccreditationsList(person.getAccreditationsInfo());
+	}
+	
+	@Inject
+	@Optional
+	private void setperson(@UIEventTopic("SELECT_PERSON") IPerson person) {
+		updatePerson(person);
 	}
 
 	@Inject

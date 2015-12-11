@@ -3,12 +3,13 @@ package es.uji.control.sip.ui.parts;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UIEventTopic;
+import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
@@ -40,14 +41,12 @@ public class UserPart {
 	private ImageDescriptor descriptor;
 
 	@PostConstruct
-	public void createComposite(Composite parent) {
+	public void createComposite(Composite parent, @Optional @Named(IServiceConstants.ACTIVE_SELECTION) IPerson person) {
 		parent.setLayout(new GridLayout(1, false));
 		Composite banner = createBanner(parent);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(banner);
-	}
-
-	@Focus
-	public void setFocus() {
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(banner);
+		
+		updatePerson(person);
 	}
 
 	private Composite createBanner(Composite parent) {
@@ -64,42 +63,40 @@ public class UserPart {
 		foto.setText("");
 		foto.setImage(image);
 		foto.setSize(100, 100);
-		GridDataFactory.fillDefaults().grab(false, false).align(SWT.BEGINNING, SWT.CENTER).span(1, 4).applyTo(foto);
+		GridDataFactory.fillDefaults().grab(false, false).align(SWT.BEGINNING, SWT.TOP).span(1, 4).indent(20, 20).applyTo(foto);
 
 		labelName = new Label(banner, SWT.NONE);
 		labelName.setText("Nombre");
-		GridDataFactory.fillDefaults().grab(true, true).align(SWT.BEGINNING, SWT.CENTER).indent(5, 5).applyTo(labelName);
+		GridDataFactory.fillDefaults().grab(true, true).align(SWT.BEGINNING, SWT.TOP).indent(0, 20).applyTo(labelName);
 
 		textName = new Label(banner, SWT.FILL | SWT.WRAP);
-		GridDataFactory.fillDefaults().grab(true, true).indent(10, 5).applyTo(textName);
+		GridDataFactory.fillDefaults().grab(true, true).indent(0, 20).applyTo(textName);
 
 		labelDni = new Label(banner, SWT.NONE);
 		labelDni.setText("DNI");
-		GridDataFactory.fillDefaults().grab(true, true).align(SWT.BEGINNING, SWT.CENTER).indent(5, 5).applyTo(labelDni);
+		GridDataFactory.fillDefaults().grab(true, true).align(SWT.BEGINNING, SWT.TOP).applyTo(labelDni);
 
 		textDni = new Label(banner, SWT.FILL | SWT.WRAP);
-		GridDataFactory.fillDefaults().grab(true, true).indent(10, 5).applyTo(textDni);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(textDni);
 
 		labelFirstLastName = new Label(banner, SWT.NONE);
 		labelFirstLastName.setText("Primer apellido");
-		GridDataFactory.fillDefaults().grab(true, true).align(SWT.BEGINNING, SWT.CENTER).indent(5, 10).applyTo(labelFirstLastName);
+		GridDataFactory.fillDefaults().grab(true, true).align(SWT.BEGINNING, SWT.TOP).applyTo(labelFirstLastName);
 
 		textFirstLastName = new Label(banner, SWT.FILL | SWT.WRAP);
-		GridDataFactory.fillDefaults().grab(true, true).indent(10, 10).applyTo(textFirstLastName);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(textFirstLastName);
 
 		labelSecondLastName = new Label(banner, SWT.NONE);
 		labelSecondLastName.setText("Segundo apellido");
-		GridDataFactory.fillDefaults().grab(true, true).align(SWT.BEGINNING, SWT.CENTER).indent(5, 10).applyTo(labelSecondLastName);
+		GridDataFactory.fillDefaults().grab(true, true).align(SWT.BEGINNING, SWT.TOP).applyTo(labelSecondLastName);
 
 		textSecondLastName = new Label(banner, SWT.FILL | SWT.WRAP);
-		GridDataFactory.fillDefaults().grab(true, true).indent(10, 10).applyTo(textSecondLastName);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(textSecondLastName);
 
 		return banner;
 	}
 	
-	@Inject 
-	@Optional
-	private void setperson(@UIEventTopic("SELECT_PERSON") IPerson person) {
+	private void updatePerson(IPerson person) {
 		if (person != null) {
 			textName.setText(person.getName());
 			textFirstLastName.setText(person.getFirstLastName());
@@ -110,7 +107,13 @@ public class UserPart {
 			textFirstLastName.setText("");
 			textSecondLastName.setText("");
 			textDni.setText("");
-		}
+		}		
+	}
+	
+	@Inject 
+	@Optional
+	private void setperson(@UIEventTopic("SELECT_PERSON") IPerson person) {
+		updatePerson(person);
 	}
 	
 	@Inject 

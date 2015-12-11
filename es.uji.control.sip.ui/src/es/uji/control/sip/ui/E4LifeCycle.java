@@ -20,8 +20,8 @@ import org.eclipse.e4.ui.workbench.lifecycle.ProcessRemovals;
 public class E4LifeCycle {
 
 	@Inject
-	private IEventBroker eventBroker; 
-	
+	private IEventBroker eventBroker;
+
 	@PostContextCreate
 	void postContextCreate(IEclipseContext workbenchContext) {
 		Activator.controlConnectionFactoryServiceTracker.activateEventBroker(eventBroker);

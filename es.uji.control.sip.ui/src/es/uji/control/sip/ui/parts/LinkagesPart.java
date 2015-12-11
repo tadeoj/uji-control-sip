@@ -2,10 +2,11 @@ package es.uji.control.sip.ui.parts;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UIEventTopic;
+import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -31,18 +32,16 @@ public class LinkagesPart {
 	private TableViewer viewer;
 	
 	@PostConstruct
-	public void createComposite(Composite parent) {
+	public void createComposite(Composite parent, @Optional @Named(IServiceConstants.ACTIVE_SELECTION) IPerson person) {
 		this.manager = new UserLinkManager();
 	
 		parent.setLayout(new GridLayout(1, false));
 		
 		Composite links = createLinks(parent);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(links);
+		
+		updatePerson(person);
 	}	
-	
-	@Focus
-	public void setFocus() {
-	}
 	
 	private Composite createLinks(Composite parent) {
 
@@ -91,12 +90,16 @@ public class LinkagesPart {
 		return viewerColumn;
 	}
 	
-	@Inject 
-	@Optional
-	private void setperson(@UIEventTopic("SELECT_PERSON") IPerson person) {
+	private void updatePerson(IPerson person) {
 		manager.clean();
 		if (person != null && person.getLinkages() != null)
 		manager.setUserLinksList(person.getLinkages());
+	}
+	
+	@Inject 
+	@Optional
+	private void setperson(@UIEventTopic("SELECT_PERSON") IPerson person) {
+		updatePerson(person);
 	}
 	
 	@Inject 

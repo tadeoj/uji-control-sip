@@ -7,7 +7,9 @@
  *******************************************************************************/
 package es.uji.control.sip.ui.parts;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -20,11 +22,11 @@ import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MPartSashContainer;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
+import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
+import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
-import org.eclipse.jface.viewers.DoubleClickEvent;
-import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -55,6 +57,9 @@ public class SearchUsersPart {
 
 	@Inject
 	private UISynchronize sync;
+	
+	@Inject 
+	private ESelectionService selectionService;
 
 	@Inject
 	private IEventBroker eventBroker;
@@ -99,6 +104,8 @@ public class SearchUsersPart {
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(users);
 
 		createListeners();
+		
+		//initStatusBar(statusManager);
 	}
 
 	private Composite createBanner(Composite parent) {
@@ -262,8 +269,9 @@ public class SearchUsersPart {
 					public void run() {						
 						userPartSash.setVisible(true);
 						IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-						Object firstElement = selection.getFirstElement();
-						eventBroker.send(PartsEnum.SELECT_PERSON.toString(), (IPerson) firstElement);
+						selectionService.setSelection(selection.getFirstElement());
+			
+						eventBroker.send(PartsEnum.SELECT_PERSON.toString(), (IPerson) selection.getFirstElement());
 					}
 				});
 			}
@@ -301,6 +309,25 @@ public class SearchUsersPart {
 			}
 		}
 
+	}
+	
+	private void initStatusBar(IStatusLineManager statusManager) {
+		if (modelSIP != null) {
+			modelSIP.setUpdateModelStateTracker(new Consumer<LocalDateTime>() {
+				
+				@Override
+				public void accept(LocalDateTime t) {
+					sync.asyncExec(new Runnable() {
+
+						@Override
+						public void run() {
+							statusManager.setMessage(String.format("Modelo cargado: %s", t.toString()));
+						}
+						
+					});
+				}
+			});
+		}
 	}
 
 	@Focus
