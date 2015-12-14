@@ -72,13 +72,6 @@ public class UserPart {
 		textName = new Label(banner, SWT.FILL | SWT.WRAP);
 		GridDataFactory.fillDefaults().grab(true, true).indent(0, 20).applyTo(textName);
 
-		labelDni = new Label(banner, SWT.NONE);
-		labelDni.setText("DNI");
-		GridDataFactory.fillDefaults().grab(true, true).align(SWT.BEGINNING, SWT.TOP).applyTo(labelDni);
-
-		textDni = new Label(banner, SWT.FILL | SWT.WRAP);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(textDni);
-
 		labelFirstLastName = new Label(banner, SWT.NONE);
 		labelFirstLastName.setText("Primer apellido");
 		GridDataFactory.fillDefaults().grab(true, true).align(SWT.BEGINNING, SWT.TOP).applyTo(labelFirstLastName);
@@ -93,6 +86,13 @@ public class UserPart {
 		textSecondLastName = new Label(banner, SWT.FILL | SWT.WRAP);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(textSecondLastName);
 
+		labelDni = new Label(banner, SWT.NONE);
+		labelDni.setText("DNI");
+		GridDataFactory.fillDefaults().grab(true, true).align(SWT.BEGINNING, SWT.TOP).applyTo(labelDni);
+
+		textDni = new Label(banner, SWT.FILL | SWT.WRAP);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(textDni);
+		
 		return banner;
 	}
 	
