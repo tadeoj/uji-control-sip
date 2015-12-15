@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="com.opcoach.e4.preferences.e4PreferenceStoreProvider">
+      <preferenceStoreProvider
+            class="es.uji.control.sip.ui.preferences.SIPPreferenceStoreProvider"
+            pluginId="es.uji.control.sip.ui.preferences">
+      </preferenceStoreProvider>
+   </extension>
+   <extension
+         point="com.opcoach.e4.preferences.e4PreferencePages">
+      <page
+            class="es.uji.control.sip.ui.preferences.internal.SIPSelectorPreferencesPage"
+            id="es.uji.control.sip.ui.preferences.page"
+            name="Conexiones">
+      </page>
+   </extension>
+
+</plugin>
