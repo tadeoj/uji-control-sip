@@ -7,9 +7,7 @@
  *******************************************************************************/
 package es.uji.control.sip.ui.parts;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.function.Consumer;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -23,7 +21,6 @@ import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MPartSashContainer;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
-import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -48,6 +45,7 @@ import es.uji.control.model.sip.IModel;
 import es.uji.control.sip.ui.model.PersonQuery;
 import es.uji.control.sip.ui.model.SearchUsersManager;
 
+@SuppressWarnings("restriction")
 public class SearchUsersPart {
 
 	public static final String PART_SASH = "es.uji.control.sip.ui.partsashcontainer.1";
@@ -105,7 +103,6 @@ public class SearchUsersPart {
 
 		createListeners();
 		
-		//initStatusBar(statusManager);
 	}
 
 	private Composite createBanner(Composite parent) {
@@ -309,25 +306,6 @@ public class SearchUsersPart {
 			}
 		}
 
-	}
-	
-	private void initStatusBar(IStatusLineManager statusManager) {
-		if (modelSIP != null) {
-			modelSIP.setUpdateModelStateTracker(new Consumer<LocalDateTime>() {
-				
-				@Override
-				public void accept(LocalDateTime t) {
-					sync.asyncExec(new Runnable() {
-
-						@Override
-						public void run() {
-							statusManager.setMessage(String.format("Modelo cargado: %s", t.toString()));
-						}
-						
-					});
-				}
-			});
-		}
 	}
 
 	@Focus
