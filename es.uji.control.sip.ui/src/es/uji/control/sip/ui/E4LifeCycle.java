@@ -7,10 +7,7 @@
  *******************************************************************************/
 package es.uji.control.sip.ui;
 
-import javax.inject.Inject;
-
 import org.eclipse.e4.core.contexts.IEclipseContext;
-import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.workbench.lifecycle.PostContextCreate;
 import org.eclipse.e4.ui.workbench.lifecycle.PreSave;
 import org.eclipse.e4.ui.workbench.lifecycle.ProcessAdditions;
@@ -19,15 +16,8 @@ import org.eclipse.e4.ui.workbench.lifecycle.ProcessRemovals;
 @SuppressWarnings("restriction")
 public class E4LifeCycle {
 
-	@Inject
-	private IEventBroker eventBroker;
-
 	@PostContextCreate
 	void postContextCreate(IEclipseContext workbenchContext) {
-		Activator.controlConnectionFactoryServiceTracker.activateEventBroker(eventBroker);
-		Activator.controlConnectionFactoryServiceTracker.open();
-		Activator.modelSIPServiceTracker.activateEventBroker(eventBroker);
-		Activator.modelSIPServiceTracker.open();
 	}
 
 	@PreSave
