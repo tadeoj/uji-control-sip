@@ -33,12 +33,14 @@
   </children>
   <handlers xmi:id="_kuX4AGzqEeWRBJTWZWHwtA" elementId="es.uji.control.sip.ui.handler.preferences" contributionURI="bundleclass://com.opcoach.e4.preferences/com.opcoach.e4.preferences.handlers.E4PreferencesHandler" command="_t8UOQGzqEeWRBJTWZWHwtA"/>
   <handlers xmi:id="_TuAXIIO7EeWPQbut-vlbVg" elementId="es.uji.control.sip.ui.handler.updateModel" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.handlers.UpdateModelHandler" command="_Hp9VQIOhEeWlHvik4xu1Sw"/>
+  <handlers xmi:id="_DRBhUKicEeW8DrAFQZ2d_Q" elementId="es.uji.control.sip.ui.handler.updatePhotos" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.handlers.UpdatePhotosHandler" command="_5GzJAKibEeW8DrAFQZ2d_Q"/>
   <rootContext xmi:id="_6wlLecgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
     <children xmi:id="_6wlLesgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
     <children xmi:id="_6wlLe8gZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
   </rootContext>
   <commands xmi:id="_t8UOQGzqEeWRBJTWZWHwtA" elementId="org.eclipse.ui.window.preferences" commandName="Preferences"/>
   <commands xmi:id="_Hp9VQIOhEeWlHvik4xu1Sw" elementId="es.uji.control.sip.ui.command.updateModel" commandName="Actualizar modelo"/>
+  <commands xmi:id="_5GzJAKibEeW8DrAFQZ2d_Q" elementId="es.uji.control.sip.ui.command.updatePhotos" commandName="Actualizar fotos"/>
   <addons xmi:id="_6wlLcsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_6wlLc8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_6wlLdMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
