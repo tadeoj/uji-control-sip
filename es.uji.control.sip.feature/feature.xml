@@ -35,6 +35,10 @@
          id="es.uji.control.model.sip.feature"
          version="1.0.0.qualifier"/>
 
+   <includes
+         id="es.uji.control.commons.feature"
+         version="1.0.0"/>
+
    <plugin
          id="es.uji.control.sip.ui"
          download-size="0"

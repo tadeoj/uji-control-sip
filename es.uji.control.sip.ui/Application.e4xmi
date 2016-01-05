@@ -23,6 +23,8 @@
         <children xsi:type="menu:HandledToolItem" xmi:id="_yZHwwGzqEeWRBJTWZWHwtA" elementId="es.uji.control.sip.ui.handledtoolitem.preferences" label="Preferencias" command="_t8UOQGzqEeWRBJTWZWHwtA"/>
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_eFqE4HJLEeWv4dHJNTTlPw" elementId="es.uji.control.sip.ui.toolbarseparator.0"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_aiMAsIO7EeWPQbut-vlbVg" elementId="es.uji.control.sip.ui.handledtoolitem.actualizarmodelo" label="Actualizar Modelo" command="_Hp9VQIOhEeWlHvik4xu1Sw"/>
+        <children xsi:type="menu:ToolBarSeparator" xmi:id="_sDheQLODEeWJo9qBU7JWeA" elementId="es.uji.control.sip.ui.toolbarseparator.1"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_stx8MLODEeWJo9qBU7JWeA" elementId="es.uji.control.sip.ui.handledtoolitem.actualizarfotos" label="Actualizar fotos" command="_5GzJAKibEeW8DrAFQZ2d_Q"/>
       </children>
     </trimBars>
     <trimBars xmi:id="_xXj0oKAEEeWKBfMk8xeyEQ" elementId="es.uji.control.sip.ui.trimbar.1" side="Bottom">

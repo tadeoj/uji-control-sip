@@ -1,5 +1,8 @@
 package es.uji.control.sip.ui.parts;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
@@ -16,11 +19,15 @@ import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
 import es.uji.control.domain.people.IPerson;
+import es.uji.control.domain.people.IPhoto;
+import es.uji.control.model.sip.IModel;
+import es.uji.control.model.sip.ModelException;
 import es.uji.control.sip.ui.Activator;
 
 public class UserPart {
@@ -39,9 +46,13 @@ public class UserPart {
 	private ImageRegistry imageRegistry;
 	private Image image;
 	private ImageDescriptor descriptor;
+	
+	private IModel model;
 
 	@PostConstruct
-	public void createComposite(Composite parent, @Optional @Named(IServiceConstants.ACTIVE_SELECTION) IPerson person) {
+	public void createComposite(Composite parent, @Optional @Named(IServiceConstants.ACTIVE_SELECTION) IPerson person, IModel model) {
+		this.model = model;
+		
 		parent.setLayout(new GridLayout(1, false));
 		Composite banner = createBanner(parent);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(banner);
@@ -55,14 +66,11 @@ public class UserPart {
 		GridLayout layout = new GridLayout(3, true);
 		banner.setLayout(layout);
 		
-		imageRegistry = JFaceResources.getImageRegistry();
-		descriptor = ImageDescriptor.createFromURL(FileLocator.find(Activator.getContext().getBundle(), new Path("/icons/userblack.png"), null));
-		image = descriptor.createImage();
+		imageRegistry = JFaceResources.getImageRegistry();		
 		
 		foto = new Label(banner, SWT.NONE); 
 		foto.setText("");
-		foto.setImage(image);
-		foto.setSize(100, 100);
+		foto.setSize(70, 80);
 		GridDataFactory.fillDefaults().grab(false, false).align(SWT.BEGINNING, SWT.TOP).span(1, 4).indent(20, 20).applyTo(foto);
 
 		labelName = new Label(banner, SWT.NONE);
@@ -98,16 +106,39 @@ public class UserPart {
 	
 	private void updatePerson(IPerson person) {
 		if (person != null) {
+			updatePhoto(person);
 			textName.setText(person.getName());
 			textFirstLastName.setText(person.getFirstLastName());
 			textSecondLastName.setText(person.getSecondLastName());
 			textDni.setText(person.getIdentification());
 		} else {
+			updatePhoto(person);
 			textName.setText("");
 			textFirstLastName.setText("");
 			textSecondLastName.setText("");
 			textDni.setText("");
 		}		
+	}
+	
+	private void updatePhoto(IPerson person) {
+		
+		if (person != null) {
+			try {
+				imageRegistry.dispose();
+				IPhoto photo = model.getPhotoById(person.getId());
+				InputStream inputStream = new ByteArrayInputStream(photo.getImage());
+				image = new Image(null, new ImageData(inputStream).scaledTo(70,80));
+				imageRegistry.put(String.valueOf(person.getId().getId()), image);
+			} catch (ModelException e) {
+				descriptor = ImageDescriptor.createFromURL(FileLocator.find(Activator.getContext().getBundle(), new Path("/icons/userblack.png"), null));
+				image = descriptor.createImage();
+			}
+		} else {
+			descriptor = ImageDescriptor.createFromURL(FileLocator.find(Activator.getContext().getBundle(), new Path("/icons/userblack.png"), null));
+			image = descriptor.createImage();
+		}
+		
+		foto.setImage(image);
 	}
 	
 	@Inject 
