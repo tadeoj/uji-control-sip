@@ -63,15 +63,18 @@ public class UserPart {
 	private Composite createBanner(Composite parent) {
 
 		Composite banner = new Composite(parent, SWT.NONE);
-		GridLayout layout = new GridLayout(3, true);
+		GridLayout layout = new GridLayout(3, false);
 		banner.setLayout(layout);
 		
 		imageRegistry = JFaceResources.getImageRegistry();		
 		
-		foto = new Label(banner, SWT.NONE); 
-		foto.setText("");
-		foto.setSize(70, 80);
-		GridDataFactory.fillDefaults().grab(false, false).align(SWT.BEGINNING, SWT.TOP).span(1, 4).indent(20, 20).applyTo(foto);
+		descriptor = ImageDescriptor.createFromURL(FileLocator.find(Activator.getContext().getBundle(), new Path("/icons/userblack.png"), null));
+		image = descriptor.createImage();
+		
+		foto = new Label(banner, SWT.FILL | SWT.WRAP); 
+		foto.setImage(image);
+		foto.setSize(120, 120);
+		GridDataFactory.fillDefaults().grab(true, true).align(SWT.BEGINNING, SWT.TOP).span(1, 4).indent(20, 20).applyTo(foto);
 
 		labelName = new Label(banner, SWT.NONE);
 		labelName.setText("Nombre");
@@ -127,7 +130,7 @@ public class UserPart {
 				imageRegistry.dispose();
 				IPhoto photo = model.getPhotoById(person.getId());
 				InputStream inputStream = new ByteArrayInputStream(photo.getImage());
-				image = new Image(null, new ImageData(inputStream).scaledTo(70,80));
+				image = new Image(null, new ImageData(inputStream).scaledTo(120, 120));
 				imageRegistry.put(String.valueOf(person.getId().getId()), image);
 			} catch (ModelException e) {
 				descriptor = ImageDescriptor.createFromURL(FileLocator.find(Activator.getContext().getBundle(), new Path("/icons/userblack.png"), null));
@@ -139,6 +142,7 @@ public class UserPart {
 		}
 		
 		foto.setImage(image);
+		foto.setSize(120, 120);
 	}
 	
 	@Inject 
