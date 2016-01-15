@@ -130,7 +130,7 @@ public class UserPart {
 				imageRegistry.dispose();
 				IPhoto photo = model.getPhotoById(person.getId());
 				InputStream inputStream = new ByteArrayInputStream(photo.getImage());
-				image = new Image(null, new ImageData(inputStream).scaledTo(120, 120));
+				image = new Image(null, new ImageData(inputStream).scaledTo(130, 160));
 				imageRegistry.put(String.valueOf(person.getId().getId()), image);
 			} catch (ModelException e) {
 				descriptor = ImageDescriptor.createFromURL(FileLocator.find(Activator.getContext().getBundle(), new Path("/icons/userblack.png"), null));
@@ -142,7 +142,7 @@ public class UserPart {
 		}
 		
 		foto.setImage(image);
-		foto.setSize(120, 120);
+		foto.setSize(130, 160);
 	}
 	
 	@Inject 

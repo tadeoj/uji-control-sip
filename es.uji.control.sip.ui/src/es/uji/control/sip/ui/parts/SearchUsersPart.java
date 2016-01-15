@@ -13,10 +13,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
-import org.eclipse.core.commands.Command;
-import org.eclipse.core.commands.ParameterizedCommand;
-import org.eclipse.e4.core.commands.ECommandService;
-import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.Focus;
@@ -66,12 +62,6 @@ public class SearchUsersPart {
 	@Inject
 	private IEventBroker eventBroker;
 	
-	@Inject
-	private ECommandService commandService;
-	 
-	@Inject
-	private EHandlerService handlerService;
-
 	private IModel modelSIP;
 
 	private Label labelName;
@@ -103,8 +93,6 @@ public class SearchUsersPart {
 		
 		userPartSash = (MPartSashContainer) modelService.find(PART_SASH, app);
 	
-	    updateModel();
-				
 		parent.setLayout(new GridLayout(1, false));
 
 		Composite banner = createBanner(parent);
@@ -320,14 +308,6 @@ public class SearchUsersPart {
 
 	}
 	
-	public void updateModel() {
-		Command cmd = commandService.getCommand("es.uji.control.sip.ui.command.updateModel");
-	    ParameterizedCommand pCmd = new ParameterizedCommand(cmd, null);
-	    if (handlerService.canExecute(pCmd)) {
-	      handlerService.executeHandler(pCmd);
-	    }
-	}
-
 	@Focus
 	void setFocus() {
 		textName.setFocus();

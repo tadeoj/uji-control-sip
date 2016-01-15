@@ -8,12 +8,16 @@ import java.util.function.Consumer;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.eclipse.core.commands.Command;
+import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.core.runtime.jobs.ProgressProvider;
+import org.eclipse.e4.core.commands.ECommandService;
+import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
@@ -41,7 +45,7 @@ public class ProgressMonitorControl {
 	}
 
 	@PostConstruct
-	public void createControls(Composite parent) {
+	public void createControls(Composite parent, ECommandService commandService, EHandlerService handlerService) {
 
 		final Composite comp = new Composite(parent, SWT.NONE);
 		comp.setLayout(new GridLayout(2, false));
@@ -78,6 +82,9 @@ public class ProgressMonitorControl {
 				return monitor.addJob(job);
 			}
 		});
+
+		updateModel(commandService, handlerService);
+
 	}
 
 	private final class GobalProgressMonitor extends NullProgressMonitor {
@@ -93,13 +100,12 @@ public class ProgressMonitorControl {
 					if (runningTasks <= 0) {
 						progressBar.setSelection(0);
 						progressBar.setMaximum(totalWork);
-
 					} else {
 						progressBar.setMaximum(progressBar.getMaximum() + totalWork);
 					}
 
 					runningTasks++;
-					progressBar.setToolTipText("Currently running: " + runningTasks + "\nLast task: " + name);
+					progressBar.setToolTipText("Actualmente ejecutandose: " + runningTasks + "\n Ultima tarea: " + name);
 				}
 			});
 		}
@@ -110,9 +116,25 @@ public class ProgressMonitorControl {
 
 				@Override
 				public void run() {
-					progressBar.setSelection(progressBar.getSelection() + work);
+					if (progressBar.getSelection() >= progressBar.getMaximum()) {
+						progressBar.setSelection(0);
+					} else {
+						progressBar.setSelection(progressBar.getSelection() + work);
+					}
 				}
 			});
+		}
+
+		@Override
+		public void done() {
+			sync.asyncExec(new Runnable() {
+
+				@Override
+				public void run() {
+					progressBar.setSelection(0);
+				}
+			});
+			super.done();
 		}
 
 		public IProgressMonitor addJob(Job job) {
@@ -126,9 +148,9 @@ public class ProgressMonitorControl {
 							public void run() {
 								runningTasks--;
 								if (runningTasks > 0) {
-									progressBar.setToolTipText("Currently running: " + runningTasks);
+									progressBar.setToolTipText("Procesos actuales: " + runningTasks);
 								} else {
-									progressBar.setToolTipText("No background progress running.");
+									progressBar.setToolTipText("No hay procesos ejecutandose.");
 								}
 							}
 						});
@@ -138,6 +160,14 @@ public class ProgressMonitorControl {
 				});
 			}
 			return this;
+		}
+	}
+
+	public void updateModel(ECommandService commandService, EHandlerService handlerService) {
+		Command cmd = commandService.getCommand("es.uji.control.sip.ui.command.updateModel");
+		ParameterizedCommand pCmd = new ParameterizedCommand(cmd, null);
+		if (handlerService.canExecute(pCmd)) {
+			handlerService.executeHandler(pCmd);
 		}
 	}
 

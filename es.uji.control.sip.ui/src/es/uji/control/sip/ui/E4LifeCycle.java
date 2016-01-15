@@ -31,4 +31,5 @@ public class E4LifeCycle {
 	@ProcessRemovals
 	void processRemovals(IEclipseContext workbenchContext) {
 	}
+	
 }

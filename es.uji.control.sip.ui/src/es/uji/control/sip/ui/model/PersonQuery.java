@@ -48,7 +48,9 @@ public class PersonQuery implements Predicate<IPerson> {
 		}
 		
 		if (getFirstLastName() != null && getFirstLastName().length() > 0) {
-			result.add(Pattern.compile(getFirstLastName(), Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE).matcher(t.getFirstLastName()).find());
+			Pattern compile = Pattern.compile(getFirstLastName(), Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
+			boolean match = compile.matcher(t.getFirstLastName()).find();
+			result.add(match);
 		}
 		
 		if (getSecondLastName() != null && getSecondLastName().length() > 0) {

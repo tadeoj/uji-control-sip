@@ -41,11 +41,12 @@ public class UpdateModelHandler {
 			protected IStatus run(IProgressMonitor monitor) {
 				try {
 					modelSIP.updateModelFromBackend();
-					monitor.beginTask("Actualizando modelo", 100);
-					TimeUnit.SECONDS.sleep(1);
-					monitor.worked(10);
-					TimeUnit.SECONDS.sleep(1);
-					monitor.worked(20);
+					monitor.beginTask("Actualizando modelo", IProgressMonitor.UNKNOWN);
+					
+					while (updating) {
+						TimeUnit.MILLISECONDS.sleep(100);
+						monitor.worked(1);
+					}
 					
 					return Status.OK_STATUS;
 				} catch (InterruptedException e) {
@@ -68,6 +69,7 @@ public class UpdateModelHandler {
 
 	@Execute
 	public void execute() {
+		job.setUser(true);
 		job.schedule();
 	}
 
