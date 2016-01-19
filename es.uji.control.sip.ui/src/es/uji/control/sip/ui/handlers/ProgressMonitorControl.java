@@ -97,15 +97,17 @@ public class ProgressMonitorControl {
 
 				@Override
 				public void run() {
-					if (runningTasks <= 0) {
-						progressBar.setSelection(0);
-						progressBar.setMaximum(totalWork);
-					} else {
-						progressBar.setMaximum(progressBar.getMaximum() + totalWork);
+					if (progressBar.isDisposed() == false) {
+						if (runningTasks <= 0) {
+							progressBar.setSelection(0);
+							progressBar.setMaximum(totalWork);
+						} else {
+							progressBar.setMaximum(progressBar.getMaximum() + totalWork);
+						}
+	
+						runningTasks++;
+						progressBar.setToolTipText("Actualmente ejecutandose: " + runningTasks + "\n Ultima tarea: " + name);
 					}
-
-					runningTasks++;
-					progressBar.setToolTipText("Actualmente ejecutandose: " + runningTasks + "\n Ultima tarea: " + name);
 				}
 			});
 		}
@@ -116,11 +118,13 @@ public class ProgressMonitorControl {
 
 				@Override
 				public void run() {
-					if (progressBar.getSelection() >= progressBar.getMaximum()) {
-						progressBar.setSelection(0);
-					} else {
-						progressBar.setSelection(progressBar.getSelection() + work);
-					}
+					if (progressBar.isDisposed() == false) {
+						if (progressBar.getSelection() >= progressBar.getMaximum()) {
+							progressBar.setSelection(0);
+						} else {
+							progressBar.setSelection(progressBar.getSelection() + work);
+						}
+					} 
 				}
 			});
 		}
@@ -131,10 +135,11 @@ public class ProgressMonitorControl {
 
 				@Override
 				public void run() {
-					progressBar.setSelection(0);
+					if (progressBar.isDisposed() == false) {
+						progressBar.setSelection(0);
+					}
 				}
 			});
-			super.done();
 		}
 
 		public IProgressMonitor addJob(Job job) {
@@ -162,7 +167,7 @@ public class ProgressMonitorControl {
 			return this;
 		}
 	}
-
+	
 	public void updateModel(ECommandService commandService, EHandlerService handlerService) {
 		Command cmd = commandService.getCommand("es.uji.control.sip.ui.command.updateModel");
 		ParameterizedCommand pCmd = new ParameterizedCommand(cmd, null);

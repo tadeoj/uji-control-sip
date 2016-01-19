@@ -2,6 +2,7 @@ package es.uji.control.sip.ui.handlers;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -62,7 +63,9 @@ public class UpdatePhotosHandler {
 		// Se actualiza el estado
 		this.updating = updating;
 		// Se fuerza al UI a actualizarse
-		eventBroker.send(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC, UIEvents.ALL_ELEMENT_ID);
+		if (eventBroker != null) {
+			eventBroker.send(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC, UIEvents.ALL_ELEMENT_ID);
+		}
 	}
 
 	@Execute
@@ -74,6 +77,12 @@ public class UpdatePhotosHandler {
 	@CanExecute
 	public boolean canExecute() {
 		return !updating;
+	}
+	
+	@PreDestroy
+	public void preDestroy() {
+		eventBroker = null;
+		job.done(Status.CANCEL_STATUS);
 	}
 	
 }

@@ -1,5 +1,7 @@
 package es.uji.control.sip.ui.model;
 
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -44,21 +46,19 @@ public class PersonQuery implements Predicate<IPerson> {
 		List<Boolean> result = new ArrayList<>(1);
 		
 		if (getName() != null && getName().length() > 0) {
-			result.add(Pattern.compile(getName(), Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE).matcher(t.getName()).find());
+			result.add(Pattern.compile(getName(), Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE).matcher(Normalizer.normalize(t.getName(), Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "")).find());
 		}
 		
 		if (getFirstLastName() != null && getFirstLastName().length() > 0) {
-			Pattern compile = Pattern.compile(getFirstLastName(), Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
-			boolean match = compile.matcher(t.getFirstLastName()).find();
-			result.add(match);
+			result.add(Pattern.compile(getFirstLastName(), Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE).matcher(Normalizer.normalize(t.getFirstLastName(), Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "")).find());
 		}
 		
 		if (getSecondLastName() != null && getSecondLastName().length() > 0) {
-			result.add(Pattern.compile(getSecondLastName(), Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE).matcher(t.getSecondLastName()).find());
+			result.add(Pattern.compile(getSecondLastName(), Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE).matcher(Normalizer.normalize(t.getSecondLastName(), Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "")).find());
 		}
 		
 		if (getIdentification() != null && getIdentification().length() > 0) {
-			result.add(Pattern.compile(getIdentification(), Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE).matcher(t.getIdentification()).find());
+			result.add(Pattern.compile(getIdentification(), Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE).matcher(Normalizer.normalize(t.getIdentification(), Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "")).find());
 		}
 		
 		return result.size() == 0 ? false : result.stream().allMatch(p -> p);
