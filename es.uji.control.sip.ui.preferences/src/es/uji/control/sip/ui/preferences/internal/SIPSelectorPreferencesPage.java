@@ -23,7 +23,7 @@ public class SIPSelectorPreferencesPage extends FieldEditorPreferencePage {
 	protected void createFieldEditors() {
 		
 		String[][] connections = new String[][]{};
-		selector = SIPPreferencesComponent.getSelector();
+		selector = SIPPreferencesComponent.factorySelector;
 		
 		if (selector != null) {
 			Set<ConnectionFactoryKey> factoryKeys = selector.getFactoryKeys();

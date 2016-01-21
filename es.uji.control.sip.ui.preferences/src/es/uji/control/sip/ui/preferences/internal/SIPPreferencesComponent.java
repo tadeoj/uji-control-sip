@@ -15,7 +15,7 @@ import es.uji.control.domain.provider.service.factoryselector.IControlConnection
 public class SIPPreferencesComponent {
 
 	private BundleContext bundlecontext;
-	static private IControlConnectionFactorySelector factorySelector;
+	static public IControlConnectionFactorySelector factorySelector;
 
 	@Activate
 	public void activate(ComponentContext componentContext) throws Exception {
@@ -31,17 +31,13 @@ public class SIPPreferencesComponent {
 		return this.bundlecontext;
 	}
 
-	@Reference(policy = ReferencePolicy.DYNAMIC, cardinality = ReferenceCardinality.OPTIONAL, name = "sipControlConnectionFactorySelector")
+	@Reference(policy = ReferencePolicy.DYNAMIC, cardinality = ReferenceCardinality.MANDATORY, name = "sipControlConnectionFactorySelector")
 	public void bindConnectionFactorySelector(IControlConnectionFactorySelector factorySelector) {
 		this.factorySelector = factorySelector;
 	}
 
 	public void unbindConnectionFactorySelector(IControlConnectionFactorySelector factorySelector) {
 		this.factorySelector = null;
-	}
-
-	public static IControlConnectionFactorySelector getSelector() {
-		return factorySelector;
 	}
 
 }

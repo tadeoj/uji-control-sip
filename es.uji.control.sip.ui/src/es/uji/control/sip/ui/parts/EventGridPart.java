@@ -131,8 +131,11 @@ public class EventGridPart {
 
 						@Override
 						public void run() {
-							manager.addEventGridEntry(new EventGridEntry(t));
-							table.setSelection(manager.getLastElementPosition());
+							
+							if (!table.isDisposed()) {
+								manager.addEventGridEntry(new EventGridEntry(t));
+								table.setSelection(manager.getLastElementPosition());
+							}
 						}
 					});
 				}

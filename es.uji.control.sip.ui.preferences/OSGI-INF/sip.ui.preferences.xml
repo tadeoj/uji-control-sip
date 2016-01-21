@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" activate="activate" deactivate="deactivate" immediate="true" name="sip.ui.preferences">
-   <reference bind="bindConnectionFactorySelector" cardinality="0..1" interface="es.uji.control.domain.provider.service.factoryselector.IControlConnectionFactorySelector" name="sipControlConnectionFactorySelector" policy="dynamic" unbind="unbindConnectionFactorySelector"/>
+   <reference bind="bindConnectionFactorySelector" cardinality="1..1" interface="es.uji.control.domain.provider.service.factoryselector.IControlConnectionFactorySelector" name="sipControlConnectionFactorySelector" policy="dynamic" unbind="unbindConnectionFactorySelector"/>
    <implementation class="es.uji.control.sip.ui.preferences.internal.SIPPreferencesComponent"/>
 </scr:component>

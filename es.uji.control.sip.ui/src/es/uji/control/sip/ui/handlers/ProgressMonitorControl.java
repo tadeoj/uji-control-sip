@@ -1,6 +1,5 @@
 package es.uji.control.sip.ui.handlers;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -19,15 +18,17 @@ import org.eclipse.core.runtime.jobs.ProgressProvider;
 import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.ui.di.UISynchronize;
-import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.ProgressBar;
 
 import es.uji.control.model.sip.IModel;
+import es.uji.control.model.sip.ModelStatus;
 
+@SuppressWarnings("restriction")
 public class ProgressMonitorControl {
 
 	private final UISynchronize sync;
@@ -47,27 +48,34 @@ public class ProgressMonitorControl {
 	@PostConstruct
 	public void createControls(Composite parent, ECommandService commandService, EHandlerService handlerService) {
 
-		final Composite comp = new Composite(parent, SWT.NONE);
-		comp.setLayout(new GridLayout(2, false));
-		comp.setSize(SWT.DEFAULT, SWT.DEFAULT);
-
+		Composite comp = new Composite(parent, SWT.FILL);
+		GridLayout grid= new GridLayout(2, false);
+		comp.setSize(parent.getSize());
+		
+		comp.setLayout(grid);
+		
 		Label label = new Label(comp, SWT.NONE);
-		GridDataFactory.fillDefaults().hint(400, SWT.DEFAULT).applyTo(label);
-
+		GridData gridDataLabel = new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
+	    gridDataLabel.horizontalIndent = 5;
+		gridDataLabel.grabExcessHorizontalSpace = true;
+		gridDataLabel.minimumWidth = 600;
+	    label.setLayoutData(gridDataLabel);
+		
 		progressBar = new ProgressBar(comp, SWT.SMOOTH);
-		progressBar.setBounds(100, 10, 200, 20);
-		GridDataFactory.fillDefaults().align(SWT.END, SWT.CENTER).applyTo(progressBar);
-
+		GridData gridDataProgress = new GridData(GridData.HORIZONTAL_ALIGN_END);
+		gridDataProgress.grabExcessHorizontalSpace = true;
+		progressBar.setLayoutData(gridDataProgress);
+		
 		if (model != null) {
-			model.setUpdateModelStateTracker(new Consumer<LocalDateTime>() {
+			model.setUpdateModelStateTracker(new Consumer<ModelStatus>() {
 
 				@Override
-				public void accept(LocalDateTime t) {
+				public void accept(ModelStatus t) {
 					sync.asyncExec(new Runnable() {
 
 						@Override
 						public void run() {
-							label.setText(String.format("Modelo cargado: %s", t.format(formatter)));
+							label.setText(String.format("Modelo cargado. Fecha: (%s), Personas: (%d)", t.getFecha().format(formatter), t.getPersonas()));
 						}
 					});
 				}
