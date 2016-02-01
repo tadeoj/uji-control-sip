@@ -47,11 +47,9 @@ public class ProgressMonitorControl {
 
 	@PostConstruct
 	public void createControls(Composite parent, ECommandService commandService, EHandlerService handlerService) {
-
+		
 		Composite comp = new Composite(parent, SWT.FILL);
 		GridLayout grid= new GridLayout(2, false);
-		comp.setSize(parent.getSize());
-		
 		comp.setLayout(grid);
 		
 		Label label = new Label(comp, SWT.NONE);
@@ -59,10 +57,12 @@ public class ProgressMonitorControl {
 	    gridDataLabel.horizontalIndent = 5;
 		gridDataLabel.grabExcessHorizontalSpace = true;
 		gridDataLabel.minimumWidth = 600;
+		gridDataLabel.minimumHeight = 40;
 	    label.setLayoutData(gridDataLabel);
 		
 		progressBar = new ProgressBar(comp, SWT.SMOOTH);
 		GridData gridDataProgress = new GridData(GridData.HORIZONTAL_ALIGN_END);
+		gridDataProgress.heightHint = 20;
 		gridDataProgress.grabExcessHorizontalSpace = true;
 		progressBar.setLayoutData(gridDataProgress);
 		

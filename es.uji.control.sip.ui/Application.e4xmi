@@ -28,9 +28,7 @@
       </children>
     </trimBars>
     <trimBars xmi:id="_xXj0oKAEEeWKBfMk8xeyEQ" elementId="es.uji.control.sip.ui.trimbar.1" side="Bottom">
-      <children xsi:type="menu:ToolBar" xmi:id="_1syIcKAEEeWKBfMk8xeyEQ" elementId="es.uji.control.sip.ui.toolbar.0">
-        <children xsi:type="menu:ToolControl" xmi:id="_3C608KAEEeWKBfMk8xeyEQ" elementId="es.uji.control.sip.ui.toolcontrol.progress" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.handlers.ProgressMonitorControl"/>
-      </children>
+      <children xsi:type="menu:ToolControl" xmi:id="_3C608KAEEeWKBfMk8xeyEQ" elementId="es.uji.control.sip.ui.toolcontrol.progress" contributionURI="bundleclass://es.uji.control.sip.ui/es.uji.control.sip.ui.handlers.ProgressMonitorControl"/>
     </trimBars>
   </children>
   <handlers xmi:id="_kuX4AGzqEeWRBJTWZWHwtA" elementId="es.uji.control.sip.ui.handler.preferences" contributionURI="bundleclass://com.opcoach.e4.preferences/com.opcoach.e4.preferences.handlers.E4PreferencesHandler" command="_t8UOQGzqEeWRBJTWZWHwtA"/>

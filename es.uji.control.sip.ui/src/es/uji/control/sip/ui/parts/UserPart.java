@@ -73,7 +73,7 @@ public class UserPart {
 		
 		foto = new Label(banner, SWT.FILL | SWT.WRAP); 
 		foto.setImage(image);
-		foto.setSize(120, 120);
+		foto.setSize(130, 160);
 		GridDataFactory.fillDefaults().grab(true, true).align(SWT.BEGINNING, SWT.TOP).span(1, 4).indent(20, 20).applyTo(foto);
 
 		labelName = new Label(banner, SWT.NONE);
